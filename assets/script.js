@@ -69,14 +69,24 @@ async function getStockDataBySymbol(symbol) {
 };
 
 function showStockData(data) {
-    var liTicker = $("<li>").text(data.symbol);
-    var liOpen = $("<li>").text("$" + data.open);
-    var liHigh = $("<li>").text("$" + data.high);
-    var liLow = $("<li>").text("$" + data.low);
-    var liClose = $("<li>").text("$" + data.close);
+    // Name here (from the DataHub.io)
+    var dataSet = JSON.parse(localStorage.getItem("sp500Data"));
+    for (let i = 0; i < dataSet.length; i++) {
+        if (data.symbol == dataSet[i].Symbol) {
+            $("#current").append($("<div>").text(dataSet[i].Name).attr("id", "current-name"));
+            $("#related-title").append($("<div>").text(dataSet[i].Sector));
+        }
+    }
+    var liTicker = $("<div>").text("Symbol: " + data.symbol).attr("id", "current-symbol");
+    var liDate = $("<div>").text(data.from).attr("id", "current-date");
+    var liOpen = $("<div>").text("Open: $" + data.open).attr("id", "current-open");
+    var liHigh = $("<div>").text("High: $" + data.high).attr("id", "current-high");
+    var liLow = $("<div>").text("Low: $" + data.low).attr("id", "current-low");
+    var liClose = $("<div>").text("Close: $" + data.close).attr("id", "current-close");
     // FORMAT!!!
-    var liVolume = $("<li>").text(data.volume);
+    var liVolume = $("<div>").text(data.volume);
     $("#current").append(liTicker);
+    $("#current").append(liDate);
     $("#current").append(liOpen);
     $("#current").append(liHigh);
     $("#current").append(liLow);
@@ -102,6 +112,7 @@ async function init () {
     // Call getsp500data function
     // otherwise it's ready to be used
     var sp500Data =  await getSP500Data();
+    localStorage.setItem("sp500Data", JSON.stringify(sp500Data));
     console.log(sp500Data);
 
     // var searchResults = getSymbolsMatchingSector('Industrials', sp500Data);
