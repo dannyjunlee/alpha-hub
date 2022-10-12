@@ -68,9 +68,20 @@ async function getStockDataBySymbol(symbol) {
 };
 
 function showStockData(data) {
-    // var liTicker = (beneath);
     var liTicker = $("<li>").text(data.symbol);
+    var liOpen = $("<li>").text("$" + data.open);
+    var liHigh = $("<li>").text("$" + data.high);
+    var liLow = $("<li>").text("$" + data.low);
+    var liClose = $("<li>").text("$" + data.close);
+    // FORMAT!!!
+    var liVolume = $("<li>").text(data.volume);
     $("#current").append(liTicker);
+    $("#current").append(liOpen);
+    $("#current").append(liHigh);
+    $("#current").append(liLow);
+    $("#current").append(liClose);
+    $("#current").append(liVolume);
+
     console.log(data.symbol);
 };
 
