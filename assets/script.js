@@ -65,10 +65,19 @@ async function getStockDataBySymbol(symbol) {
     var data = await response.json();
     console.log(data);
     return data;
-}
+};
+
+function showStockData(data) {
+    // var liTicker = (beneath);
+    var liTicker = $("<li>").text(data.symbol);
+    $("#current").append(liTicker);
+    console.log(data.symbol);
+};
 
 async function init () {
-
+    // If localstorage getitem (key) returns undefined,
+    // Call getsp500data function
+    // otherwise it's ready to be used
     var sp500Data =  await getSP500Data();
     console.log(sp500Data);
 
@@ -84,16 +93,18 @@ async function init () {
     //     // rate limited 5 requests / min
     //     console.log(stockData); 
     // }
+
 };
 
 // USER INTERACTION
 // User inputs stock or sector name and presses “Search”
-searchButtonEl.on("click", function(event) {
+searchButtonEl.on("click", async function(event) {
     event.preventDefault();
     console.log(searchInputEl.val());
     var symbol = searchInputEl.val();
-    getStockDataBySymbol(symbol);
+    var data = await getStockDataBySymbol(symbol);
     console.log("Symbol");
+    showStockData(data);
 });
 
 // INITIALIZATION
