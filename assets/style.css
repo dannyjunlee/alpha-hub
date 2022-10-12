@@ -7,25 +7,34 @@
 
 @font-face {
     font-family: mine1;
-    src: url(PostNews.ttf);
+    src: url(LicensePlate.ttf);
+}
+
+@font-face {
+    font-family: mine2;
+    src: url(SpecialElite.ttf);
 }
 
 body {
     padding-top: 25px;
+    background-color: rgb(255, 255, 255);
 }
 
 header {
     padding-top: 10px;
     padding-bottom: 10px;
     margin: auto;
+    margin-bottom: 10px;
     text-align: center;
     color: black;
-    background-image: linear-gradient(green, white);
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+    background-image: url("newspaperbackground.jpg");
 }
 
 h1 {
-    font-size: 60px;
     font-family: mine1, Arial, Helvetica, sans-serif;
+    font-size: 60px;
     font-weight: lighter;
 }
 
@@ -37,6 +46,7 @@ aside {
 }
 
 h2 {
+    font-family: mine2, Arial, Helvetica, sans-serif;
     font-size: 32px;
     font-weight: bold;
 }
@@ -49,6 +59,7 @@ input {
     font-size: 20px;
     width: 100%;
     height: 40px;
+    box-shadow: 2px 2px 2px black;
 }
 
 #list-group-item {
@@ -58,7 +69,7 @@ input {
     box-shadow: 2px 2px 2px black;
 }
 
-button {
+.pure-button {
     margin-top: 20px;
     margin-bottom: 20px;
     width: 100%;
@@ -78,8 +89,9 @@ button {
     margin-left: 20px;
     border: 2px solid black;
     box-shadow: 2px 2px 2px black;
-    font-weight: bold;
+    background-image: linear-gradient(rgb(220, 220, 220), white);
     font-size: 32px;
+    font-weight: bold;
 }
 
 #related {
@@ -92,10 +104,11 @@ button {
     margin-bottom: 10px;
     margin-right: 20px;
     margin-left: 20px;
+    background-image: linear-gradient(rgb(220, 220, 220), white);
     border: 2px solid black;
     box-shadow: 2px 2px 2px black;
-    font-weight: bold;
     font-size: 32px;
+    font-weight: bold;
 }
 
 #related-title {
@@ -105,7 +118,7 @@ button {
 }
 
 #related1, #related2, #related3 {
-    background-color: rgb(225, 225, 225);
+    background-color: rgb(255, 255, 255);
     border: 2px solid black;
     box-shadow: 2px 2px 2px black;
     width: fit-content;
@@ -115,6 +128,12 @@ button {
     margin: 10px;
     padding: 5px;
     font-size: 20px;
+}
+
+#related1:hover, #related2:hover, #related3:hover {
+    scale: 105%;
+    font-size: 22px;
+    background-image: url("newspaperbackground.jpg");
 }
 
 @media screen and (max-width: 700px) {
