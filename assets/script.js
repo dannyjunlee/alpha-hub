@@ -14,6 +14,7 @@
 
 var searchInputEl = $("#stock-name");
 var searchButtonEl = $(".pure-button");
+var recentSearchListEl = $("#stock-list");
 
 // DATA
 // Datahub.io JSON - list of all stocks in S&P 500 with stock name, ticker, and sector
@@ -82,8 +83,19 @@ function showStockData(data) {
     $("#current").append(liClose);
     $("#current").append(liVolume);
 
-    console.log(data.symbol);
+    // Append to recent searches
+    var liTickerBtn = $("<li>").text(data.symbol);
+    recentSearchListEl.append(liTickerBtn);
+
+    // Show related stocks in related stocks section
+    // Probably use for loop to go through datahub.io dataset for matching sectors
+    // Or use getSymbolsMatchingSector() function
 };
+
+// Function to clear page and reset to default values upon update of page information
+function clearPage() {
+    searchInputEl.text("Search");
+}
 
 async function init () {
     // If localstorage getitem (key) returns undefined,
