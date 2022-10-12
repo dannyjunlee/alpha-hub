@@ -4,13 +4,69 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Project 1 Group 4</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css">
-    <link rel="stylesheet" href="./assets/css/style.css">
+    <title>Stock Checker</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/purecss@2.1.0/build/pure-min.css" integrity="sha384-yHIFVG6ClnONEA5yB5DJXfW2/KC173DIQrYoZMEtBvGzmf0PKiGyNEqe9N6BNDBH" crossorigin="anonymous">
+    <link rel="stylesheet" href="./assets/style.css">
 </head>
+
 <body>
-    <!-- Notes -->
+    <header>
+        <h1>Stock Checker - Under Construction</h1>
+    </header>
+
+    <aside>
+        <div class="container">
+            <div class="row">
+              <div class="col">
+                <h2>Search for a Stock</h3>
+                <br />
+                <form id="search-form">
+                  <div class="search-group row">
+                    <div class="col">
+                      <input type="text" class="search-control" id="stock-name" />
+                    </div>
+                  </div>
+                  <button class="pure-button pure-button-primary">Search</button>
+                </form>
+              </div>
+            </div>
+            <div>
+                <div>
+                    <h2>Recent Searches</h3>
+                    <br />
+                    <ul class="list-group" id="stock-list"></ul>
+                </div>
+            </div>
+        </div>
+    </aside>
+
+    <section id="current">
+        <div id="current-name">Search for a stock to see current information here</div>
+        <div id="current-date"></div>
+        <img id="current-trend"></img>
+        <div id="current-info"></div>
+    </section>
+
+    <section id="related">
+        <h3 id="related-title">See Related Stocks Here</h3>
+        <div id="related1">
+            <div id="related-name1">"Name of Stock"</div>
+            <img id="related-img1">"Trend Graph"</img>
+            <div id="related-info1">"Stats or Whatever"</div>
+          </div>
+          <div id="related2">
+            <div id="related-name2">"Name of Stock"</div>
+            <img id="related-img2">"Trend Graph"</img>
+            <div id="related-info2">"Stats or Whatever"</div>
+          </div>
+          <div id="related3">
+            <div id="related-name3">"Name of Stock"</div>
+            <img id="related-img3">"Trend Graph"</img>
+            <div id="related-info3">"Stats or Whatever"</div>
+          </div>
+    </section>
 </body>
+
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script src="./assets/script.js"></script>
 </html>
