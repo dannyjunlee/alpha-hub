@@ -4,21 +4,21 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Stock Checker</title>
+    <title>AlphaHub</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/purecss@2.1.0/build/pure-min.css" integrity="sha384-yHIFVG6ClnONEA5yB5DJXfW2/KC173DIQrYoZMEtBvGzmf0PKiGyNEqe9N6BNDBH" crossorigin="anonymous">
     <link rel="stylesheet" href="./assets/style.css">
 </head>
 
 <body>
     <header>
-        <h1>Stock Checker - Under Construction</h1>
+        <h1>AlphaHub - Under Construction</h1>
     </header>
 
     <aside>
         <div class="container">
             <div class="row">
               <div class="col">
-                <h2>Search for a Stock</h3>
+                <h2>Search for a Stock</h2>
                 <br />
                 <form id="search-form">
                   <div class="search-group row">
@@ -31,38 +31,36 @@
               </div>
             </div>
             <div>
-                <div>
-                    <h2>Recent Searches</h3>
+                <div id="recent-searches">
+                  <h3>Recent Searches</h3>
                     <br />
-                    <ul class="list-group" id="stock-list"></ul>
+                    <ul class="list-group" id="stock-list">
+                      <li id="list-group-item">Apple</li>
+                    </ul>
                 </div>
             </div>
         </div>
     </aside>
 
     <section id="current">
-        <div id="current-name">Search for a stock to see current information here</div>
-        <div id="current-date"></div>
-        <img id="current-trend"></img>
-        <div id="current-info"></div>
+        <div id="current-name">Apple</div>
+        <div id="current-date">Date</div>
+        <div id="current-symbol">Symbol: AAPL</div>
+        <div id="current-open">Open: 123.4</div>
+        <div id="current-close">Close: 567.8</div>
+        <div id="current-high">High: 901.2</div>
+        <div id="current-low">Low: 345.6</div>
     </section>
 
     <section id="related">
-        <h3 id="related-title">See Related Stocks Here</h3>
+        <h3 id="related-title">Related Stocks</h3>
         <div id="related1">
-            <div id="related-name1">"Name of Stock"</div>
-            <img id="related-img1">"Trend Graph"</img>
-            <div id="related-info1">"Stats or Whatever"</div>
+            <div id="related-name1">Citigroup</div>
+            <div id="related-symbol1">C</div>
           </div>
           <div id="related2">
-            <div id="related-name2">"Name of Stock"</div>
-            <img id="related-img2">"Trend Graph"</img>
-            <div id="related-info2">"Stats or Whatever"</div>
-          </div>
-          <div id="related3">
-            <div id="related-name3">"Name of Stock"</div>
-            <img id="related-img3">"Trend Graph"</img>
-            <div id="related-info3">"Stats or Whatever"</div>
+            <div id="related-name2">Netflix</div>
+            <div id="related-symbol2">NFLX</div>
           </div>
     </section>
 </body>

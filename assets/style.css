@@ -10,14 +10,9 @@
     src: url(LicensePlate.ttf);
 }
 
-@font-face {
-    font-family: mine2;
-    src: url(SpecialElite.ttf);
-}
-
 body {
     padding-top: 25px;
-    background-color: rgb(255, 255, 255);
+    background-image: url("heroscreen.cc-V1-01282021-stock-market-wallpaper-HD\ \(1\).png");
 }
 
 header {
@@ -45,14 +40,16 @@ aside {
     padding: 10px;
 }
 
-h2 {
-    font-family: mine2, Arial, Helvetica, sans-serif;
+h2, h3 {
+    font-family: mine1, Arial, Helvetica, sans-serif;
     font-size: 32px;
     font-weight: bold;
+    color: white;
+    margin-top: 10px;
 }
 
 #search-form {
-    border-bottom: 2px solid black;
+    border-bottom: 2px solid white;
 }
 
 input {
@@ -62,19 +59,39 @@ input {
     box-shadow: 2px 2px 2px black;
 }
 
+#recent-searches {
+    display: flex;
+    flex-direction: column;
+}
+
 #list-group-item {
     font-size: 20px;
-    background-color: rgb(142, 199, 255);
+    height: 32px;
+    padding: 2px;
+    width: 50%;
+    text-align: center;
+    background-image: linear-gradient(rgb(220, 220, 220), white);
     border: 1px solid black;
+    border-radius: 5px;
+}
+
+#list-group-item:hover {
     box-shadow: 2px 2px 2px black;
+    font-weight: bold;
+    scale: 102%
 }
 
 .pure-button {
     margin-top: 20px;
     margin-bottom: 20px;
     width: 100%;
-    background-color: green;
+    background-color: blue;
+    border: 1px solid white;
     box-shadow: 2px 2px 2px black;
+}
+
+.pure-button:hover {
+    scale: 105%;
 }
 
 #current {
@@ -88,10 +105,27 @@ input {
     margin-right: 20px;
     margin-left: 20px;
     border: 2px solid black;
+    border-radius: 15px;
     box-shadow: 2px 2px 2px black;
-    background-image: linear-gradient(rgb(220, 220, 220), white);
+    background-image: url("newspaperbackground.jpg");
     font-size: 32px;
     font-weight: bold;
+}
+
+#current-name {
+    font-family: mine1, Arial, Helvetica, sans-serif;
+    font-size: larger;
+    color: black;
+    margin: 10px;
+    flex-basis: 100%;
+    text-align: center;
+}
+
+#current-date, #current-symbol, #current-open, #current-close, #current-high, #current-low {
+    font-size: 24px;
+    width: 200px;
+    height: 50px;
+    margin: 5px;
 }
 
 #related {
@@ -105,26 +139,30 @@ input {
     margin-right: 20px;
     margin-left: 20px;
     background-image: linear-gradient(rgb(220, 220, 220), white);
+    background-image: url("newspaperbackground.jpg");
     border: 2px solid black;
+    border-radius: 15px;
     box-shadow: 2px 2px 2px black;
     font-size: 32px;
     font-weight: bold;
 }
 
 #related-title {
+    font-family: mine1, Arial, Helvetica, sans-serif;
     font-size: 24;
     font-weight: bold;
+    color: black;
     flex-basis: 100%;
 }
 
 #related1, #related2, #related3 {
     background-color: rgb(255, 255, 255);
     border: 2px solid black;
+    border-radius: 5px;
     box-shadow: 2px 2px 2px black;
     width: fit-content;
-    min-width: 300px;
+    min-width: 100px;
     height: fit-content;
-    min-height: 150px;
     margin: 10px;
     padding: 5px;
     font-size: 20px;
@@ -133,7 +171,8 @@ input {
 #related1:hover, #related2:hover, #related3:hover {
     scale: 105%;
     font-size: 22px;
-    background-image: url("newspaperbackground.jpg");
+    color: white;
+    background-color: blue;
 }
 
 @media screen and (max-width: 700px) {
