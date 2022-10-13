@@ -174,7 +174,7 @@ $( function() {
 
 recentSearchListEl.on("click", "button", async function(event) {
     event.preventDefault();
-    var symbol = $(event.target).text;
+    var symbol = $(event.target).text();
     var data = await getStockDataBySymbol(symbol);
     console.log("Symbol");
     showStockData(data);
