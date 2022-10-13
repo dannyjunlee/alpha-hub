@@ -18,7 +18,8 @@ var recentSearchListEl = $("#recent-stock-list");
 var relatedTitleEl = $("#related-title");
 var sp500Data;
 var autoCompleteOptions;
-var apiKey = "LTUSnoXHn7D2TptGlI2Us7u3R7nO2efZ";
+var apiKey = "1i1Gt4ouk9CYyV8NL9aIDZulQxCnANAX";
+var savedSearches = JSON.parse(localStorage.getItem("savedSearches")) || [];
 
 // Date
 var lastWeekDay = new Date();
@@ -160,6 +161,8 @@ function showStockData(data) {
         if (index === 0) {
             var liTickerBtn = $("<button>").text(data.symbol);
             $("#recent-stock-list").append(liTickerBtn);
+        savedSearches.push(data.symbol);
+        localStorage.setItem("savedSearches", JSON.stringify(savedSearches));
         };
 
         
@@ -193,6 +196,17 @@ function clearPage() {
     };
 };
 
+function renderSearches() {
+    recentSearchListEl.children().text("");
+    for (let i = 0; i < savedSearches.length; i++) {
+        var savedStock = $("<button>").text(savedSearches[i]);
+        recentSearchListEl.append(savedStock);
+
+        // var liTickerBtn = $("<button>").text(data.symbol);
+        // $("#recent-stock-list").append(liTickerBtn);
+    };
+};
+
 async function init () {
     // If localstorage getitem (key) returns undefined,
     // Call getsp500data function
@@ -203,6 +217,8 @@ async function init () {
         console.log("Stored S&P Data in Local Storage");
     }
     autoCompleteOptions = getAutoCompleteOptions()
+    // savedSearches = JSON.parse(localStorage.getItem("savedSearches"));
+    renderSearches();
 
 
 
@@ -256,4 +272,3 @@ $("#recent-stock-list").on("click", "button", async function(event) {
 // INITIALIZATION
 
 // hello
-
