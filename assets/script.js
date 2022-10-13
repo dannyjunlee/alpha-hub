@@ -18,7 +18,7 @@ var recentSearchListEl = $("#recent-stock-list");
 var relatedTitleEl = $("#related-title");
 var sp500Data;
 var autoCompleteOptions;
-var apiKey = "Bakn5W_ck6_i8QVWKf2tgb5MDFOF4bkw";
+var apiKey = "SX5NRTu0oVANGftCAgnWfnQxSDFKaxHD";
 
 // DATA
 // Datahub.io JSON - list of all stocks in S&P 500 with stock name, ticker, and sector
