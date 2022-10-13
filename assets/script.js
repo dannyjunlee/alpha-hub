@@ -7,6 +7,7 @@ var searchInputEl = $("#stock-name");
 var searchButtonEl = $(".pure-button");
 var recentSearchListEl = $("#recent-stock-list");
 var relatedTitleEl = $("#related-title");
+var relatedStockListEl = $("#related-button");
 
 // DATA
 var sp500Data;
@@ -204,15 +205,15 @@ recentSearchListEl.on("click", "button", async function(event) {
 });
 
     // User clicks on related stocks to show info on page
-// $("#sectorStocks").on("click", "button", async function(event) {
-//     event.preventDefault();
-//     clearPage();
-//     var symbolIndex = $(event.target).val().split(" - ");
-//     var symbol = symbolIndex[1];
-//     var data = await getStockDataBySymbol(symbol);
-//     console.log("Symbol");
-//     showStockData(data);
-// });
+$("#sectorStocks").on("click", "button", async function(event) {
+    event.preventDefault();
+    clearPage();
+    var symbolIndex = $(event.target).text().split(" - ");
+    var symbol = symbolIndex[1];
+    var data = await getStockDataBySymbol(symbol);
+    console.log("Symbol");
+    showStockData(data);
+});
 
 // INITIALIZATION
 init();
