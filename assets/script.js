@@ -15,8 +15,36 @@
 var searchInputEl = $("#stock-name");
 var searchButtonEl = $(".pure-button");
 var recentSearchListEl = $("#recent-stock-list");
+var relatedTitleEl = $("#related-title");
 var sp500Data;
 var autoCompleteOptions;
+var apiKey = "SX5NRTu0oVANGftCAgnWfnQxSDFKaxHD";
+
+// Date
+var lastWeekDay = new Date();
+var yesterday = new Date();
+var dateOptions = {
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit"
+};
+
+yesterday.setDate(yesterday.getDate()-1);
+
+if (yesterday.getDate() == 6) {
+    lastWeekDay.setDate(lastWeekDay.getDate()-2);
+} else if (yesterday.getDate() == 0) {
+    lastWeekDay.setDate(lastWeekDay.getDate()-3);
+} else {
+    lastWeekDay.setDate(lastWeekDay.getDate()-1);
+};
+
+console.log(("0" + (lastWeekDay.getMonth()+1)).slice(-2));
+
+lastWeekDay = 
+    lastWeekDay.getFullYear() + "-" + 
+    ("0" + (lastWeekDay.getMonth()+1)).slice(-2) + "-" +
+    ("0" + lastWeekDay.getDate()).slice(-2);
 
 // DATA
 // Datahub.io JSON - list of all stocks in S&P 500 with stock name, ticker, and sector
@@ -77,7 +105,7 @@ function getSymbolsMatchingSector(searchSector, sp500Data) {
 // function that takes in a stock symbol, makes a fetch call to polygon API, and returns data on that stock
 async function getStockDataBySymbol(symbol) {
     // Make sure date will update dynamically too
-    var polygonURL = "https://api.polygon.io/v1/open-close/" + symbol.toUpperCase() + "/2022-10-11?adjusted=true&apiKey=FlToY1WBGF5kiYC7dn85gxRAV3UviYAQ"
+    var polygonURL = "https://api.polygon.io/v1/open-close/" + symbol.toUpperCase() + "/" + lastWeekDay + "?adjusted=true&apiKey=" + apiKey;
 
 
     var response = await fetch(polygonURL);
@@ -93,8 +121,8 @@ function showStockData(data) {
         if (data.symbol == dataSet[i].Symbol) {
             $("#current").append($("<div>").text(dataSet[i].Name).attr("id", "current-name"));
             $("#related-title").append($("<div>").text(dataSet[i].Sector));
-        }
-    }
+        };
+    };
     var liTicker = $("<div>").text("Symbol: " + data.symbol).attr("id", "current-symbol");
     var liDate = $("<div>").text(data.from).attr("id", "current-date");
     var liOpen = $("<div>").text("Open: $" + data.open).attr("id", "current-open");
@@ -123,7 +151,11 @@ function showStockData(data) {
 // Function to clear page and reset to default values upon update of page information
 function clearPage() {
     searchInputEl.text("Search");
-}
+    $("#current").text("");
+    if (relatedTitleEl.children().length > 0) {
+        relatedTitleEl.children().empty();
+    };
+};
 
 async function init () {
     // If localstorage getitem (key) returns undefined,
@@ -157,6 +189,7 @@ async function init () {
 // User inputs stock or sector name and presses “Search”
 searchButtonEl.on("click", async function(event) {
     event.preventDefault();
+    clearPage();
     console.log(searchInputEl.val());
     var symbol = searchInputEl.val().split(" - ")[0];
     var data = await getStockDataBySymbol(symbol);
