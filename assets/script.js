@@ -161,6 +161,19 @@ function showStockData(data) {
     // Show related stocks in related stocks section
     // Probably use for loop to go through datahub.io dataset for matching sectors
     // Or use getSymbolsMatchingSector() function
+
+    var sectorName = $("#related-title").children().eq(0).text();
+    var sectorStocks = $("#sectorStocks");
+
+    for (let i = 0; i < dataSet.length; i++) {
+        if (dataSet[i].Sector == sectorName) {
+            console.log(dataSet[i].Name);
+            var sectorStockBtn = $("<button>").text(dataSet[i].Name + " - " + dataSet[i].Symbol);
+            sectorStocks.append(sectorStockBtn);
+        }
+    }
+
+
 };
 
 // Function to clear page and reset to default values upon update of page information
