@@ -163,14 +163,36 @@ function showStockData(data) {
         if (index === 0) {
             var liTickerBtn = $("<button>").text(data.symbol);
             $("#recent-stock-list").append(liTickerBtn);
-        savedSearches.push(data.symbol);
-        localStorage.setItem("savedSearches", JSON.stringify(savedSearches));
+            savedSearches.push(data.symbol);
+            localStorage.setItem("savedSearches", JSON.stringify(savedSearches));
+        };
+
+        var sectorName = $("#related-title").children().eq(0).text();
+        var sectorStocks = $("#sectorStocks");
+    
+        for (let i = 0; i < dataSet.length; i++) {
+            if (dataSet[i].Sector == sectorName) {
+                console.log(dataSet[i].Name);
+                var sectorStockBtn = $("<button>").text(dataSet[i].Name + " - " + dataSet[i].Symbol);
+                sectorStocks.append(sectorStockBtn);
+            }
         };
 
     // Show related stocks in related stocks section
     // Probably use for loop to go through datahub.io dataset for matching sectors
     // Or use getSymbolsMatchingSector() function
 }};
+
+function renderSearches() {
+    recentSearchListEl.children().text("");
+    for (let i = 0; i < savedSearches.length; i++) {
+        var savedStock = $("<button>").text(savedSearches[i]);
+        recentSearchListEl.append(savedStock);
+
+        // var liTickerBtn = $("<button>").text(data.symbol);
+        // $("#recent-stock-list").append(liTickerBtn);
+    };
+};
 
 // Function to clear page and reset to default values upon update of page information
 function clearPage() {
@@ -190,6 +212,7 @@ async function init () {
         localStorage.setItem("sp500Data", JSON.stringify(sp500Data));
         console.log("Stored S&P Data in Local Storage");
     }
+    renderSearches();
     autoCompleteOptions = getAutoCompleteOptions()
 
 
@@ -231,6 +254,7 @@ $( function() {
 
 recentSearchListEl.on("click", "button", async function(event) {
     event.preventDefault();
+    clearPage();
     var symbol = $(event.target).text();
     var data = await getStockDataBySymbol(symbol);
     console.log("Symbol");
