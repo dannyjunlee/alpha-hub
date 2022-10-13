@@ -73,6 +73,7 @@ input {
     background-image: linear-gradient(rgb(220, 220, 220), white);
     border: 1px solid black;
     border-radius: 5px;
+    cursor: pointer;
 }
 
 /* #list-group-item {

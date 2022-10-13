@@ -165,9 +165,9 @@ $( function() {
     });
   } );
 
-recentSearchListEl.children().on("click", async function(event) {
+recentSearchListEl.on("click", "button", async function(event) {
     event.preventDefault();
-    var symbol = event.target.text;
+    var symbol = $(event.target).text();
     var data = await getStockDataBySymbol(symbol);
     console.log("Symbol");
     showStockData(data);
