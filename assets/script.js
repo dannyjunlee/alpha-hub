@@ -285,3 +285,5 @@ $("#recent-stock-list").on("click", "button", async function(event) {
 // });
 // INITIALIZATION
 
+// hello
+
