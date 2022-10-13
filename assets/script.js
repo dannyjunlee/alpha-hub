@@ -79,7 +79,7 @@ async function getSP500Data() {
     var response = await fetch(datahubURL);
     return await response.json();
     
-}
+};
 
 function getAutoCompleteOptions() {
     var sp500Data = JSON.parse(localStorage.getItem("sp500Data"));
@@ -88,7 +88,7 @@ function getAutoCompleteOptions() {
         options.push(sp500Data[i].Symbol + " - " + sp500Data[i].Name);
     }
     return options;
-}
+};
 
 // function that takes in a sector, searches datahub data and returns a list of stocks that match that sector
 
@@ -101,7 +101,7 @@ function getSymbolsMatchingSector(searchSector, sp500Data) {
         }
     }
     return matches;
-}
+};
 
 // function that takes in a stock symbol, makes a fetch call to polygon API, and returns data on that stock
 async function getStockDataBySymbol(symbol) {
@@ -170,7 +170,7 @@ function showStockData(data) {
     // Show related stocks in related stocks section
     // Probably use for loop to go through datahub.io dataset for matching sectors
     // Or use getSymbolsMatchingSector() function
-};
+}};
 
 // Function to clear page and reset to default values upon update of page information
 function clearPage() {
@@ -179,7 +179,6 @@ function clearPage() {
     if (relatedTitleEl.children().length > 0) {
         relatedTitleEl.children().empty();
     };
-    $("#sectorStocks").children().text("");
 };
 
 async function init () {
