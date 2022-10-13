@@ -138,7 +138,7 @@ function showStockData(data) {
             }
         };
     } else{
-            $("#current").append("<h2>Invalid Stock</h2>").attr("id", "invalid-stock");
+            $("#current").append("<h2>Invalid Stock - Please Choose From the Autocomplete List</h2>").attr("id", "invalid-stock");
         }
 };
 
