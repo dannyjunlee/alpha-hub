@@ -14,7 +14,7 @@
 
 var searchInputEl = $("#stock-name");
 var searchButtonEl = $(".pure-button");
-var recentSearchListEl = $("#stock-list");
+var recentSearchListEl = $("#recent-stock-list");
 
 // DATA
 // Datahub.io JSON - list of all stocks in S&P 500 with stock name, ticker, and sector
@@ -59,7 +59,7 @@ function getSymbolsMatchingSector(searchSector, sp500Data) {
 // function that takes in a stock symbol, makes a fetch call to polygon API, and returns data on that stock
 async function getStockDataBySymbol(symbol) {
     // Make sure date will update dynamically too
-    var polygonURL = "https://api.polygon.io/v1/open-close/" + symbol + "/2022-10-11?adjusted=true&apiKey=FlToY1WBGF5kiYC7dn85gxRAV3UviYAQ"
+    var polygonURL = "https://api.polygon.io/v1/open-close/" + symbol + "/2022-10-12?adjusted=true&apiKey=2hADQm8N9VGyKk1VcGYJfubevX9k2BHY"
 
 
     var response = await fetch(polygonURL);
@@ -77,25 +77,25 @@ function showStockData(data) {
             $("#related-title").append($("<div>").text(dataSet[i].Sector));
         }
     }
-    var liTicker = $("<div>").text("Symbol: " + data.symbol).attr("id", "current-symbol");
-    var liDate = $("<div>").text(data.from).attr("id", "current-date");
-    var liOpen = $("<div>").text("Open: $" + data.open).attr("id", "current-open");
-    var liHigh = $("<div>").text("High: $" + data.high).attr("id", "current-high");
-    var liLow = $("<div>").text("Low: $" + data.low).attr("id", "current-low");
-    var liClose = $("<div>").text("Close: $" + data.close).attr("id", "current-close");
+    var stockTicker = $("<div>").text("Symbol: " + data.symbol).attr("id", "current-symbol");
+    var stockDate = $("<div>").text(data.from).attr("id", "current-date");
+    var stockOpen = $("<div>").text("Open: $" + data.open).attr("id", "current-open");
+    var stockHigh = $("<div>").text("High: $" + data.high).attr("id", "current-high");
+    var stockLow = $("<div>").text("Low: $" + data.low).attr("id", "current-low");
+    var stockClose = $("<div>").text("Close: $" + data.close).attr("id", "current-close");
     // FORMAT!!!
-    var liVolume = $("<div>").text(data.volume);
-    $("#current").append(liTicker);
-    $("#current").append(liDate);
-    $("#current").append(liOpen);
-    $("#current").append(liHigh);
-    $("#current").append(liLow);
-    $("#current").append(liClose);
-    $("#current").append(liVolume);
+    var stockVolume = $("<div>").text(data.volume);
+    $("#current").append(stockTicker);
+    $("#current").append(stockDate);
+    $("#current").append(stockOpen);
+    $("#current").append(stockHigh);
+    $("#current").append(stockLow);
+    $("#current").append(stockClose);
+    $("#current").append(stockVolume);
 
     // Append to recent searches
-    var liTickerBtn = $("<li>").text(data.symbol);
-    recentSearchListEl.append(liTickerBtn);
+    var recentTickerBtn = $("<li>").text(data.symbol);
+    recentSearchListEl.append(recentTickerBtn);
 
     // Show related stocks in related stocks section
     // Probably use for loop to go through datahub.io dataset for matching sectors
