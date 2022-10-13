@@ -64,7 +64,7 @@ input {
     flex-direction: column;
 }
 
-#list-group-item {
+#recent-stock-list button {
     font-size: 20px;
     height: 32px;
     padding: 2px;
@@ -74,6 +74,17 @@ input {
     border: 1px solid black;
     border-radius: 5px;
 }
+
+/* #list-group-item {
+    font-size: 20px;
+    height: 32px;
+    padding: 2px;
+    width: 50%;
+    text-align: center;
+    background-image: linear-gradient(rgb(220, 220, 220), white);
+    border: 1px solid black;
+    border-radius: 5px;
+} */
 
 #list-group-item:hover {
     box-shadow: 2px 2px 2px black;
