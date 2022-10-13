@@ -18,7 +18,7 @@ var recentSearchListEl = $("#recent-stock-list");
 var relatedTitleEl = $("#related-title");
 var sp500Data;
 var autoCompleteOptions;
-var apiKey = "SX5NRTu0oVANGftCAgnWfnQxSDFKaxHD";
+var apiKey = "LTUSnoXHn7D2TptGlI2Us7u3R7nO2efZ";
 
 // Date
 var lastWeekDay = new Date();
@@ -38,8 +38,6 @@ if (yesterday.getDate() == 6) {
 } else {
     lastWeekDay.setDate(lastWeekDay.getDate()-1);
 };
-
-console.log(("0" + (lastWeekDay.getMonth()+1)).slice(-2));
 
 lastWeekDay = 
     lastWeekDay.getFullYear() + "-" + 
@@ -140,8 +138,25 @@ function showStockData(data) {
     $("#current").append(liVolume);
 
     // Append to recent searches
-    var liTickerBtn = $("<button>").text(data.symbol);
-    $("#recent-stock-list").append(liTickerBtn);
+    // var liTickerBtn = $("<button>").text(data.symbol);
+    // $("#recent-stock-list").append(liTickerBtn);
+
+    // If ANY of the list elements in recent searches list contains the symbol
+    // Do NOT place a new button
+    // Else DO place a new button
+
+    var index = 0;
+
+    for (let i = 0; i < $("#recent-stock-list").children().length; i++) {
+        if ($("#recent-stock-list").children().eq(i).text() == data.symbol) {
+            index++;
+        };
+    };
+
+    if (index === 0) {
+        var liTickerBtn = $("<button>").text(data.symbol);
+        $("#recent-stock-list").append(liTickerBtn);
+    };
 
     // Show related stocks in related stocks section
     // Probably use for loop to go through datahub.io dataset for matching sectors
@@ -205,8 +220,9 @@ $( function() {
     });
   } );
 
-recentSearchListEl.on("click", "button", async function(event) {
+$("#recent-stock-list").on("click", "button", async function(event) {
     event.preventDefault();
+    clearPage();
     var symbol = $(event.target).text();
     var data = await getStockDataBySymbol(symbol);
     console.log("Symbol");
