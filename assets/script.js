@@ -37,6 +37,13 @@ var autoCompleteOptions;
 // Save search to local storage and append as re-searchable list item underneath search
 
 // function that makes a fetch call to datahub API and gets list of S&P 500 stocks
+// $(document).ready(function () {
+//     recentSearchListEl = JSON.parse(localStorage.getItem("recent-stock-list"));
+//     cityArray.forEach(city =>{
+//       printSearch(city);
+//     })
+//   });
+
 async function getSP500Data() {
     var datahubURL = "https://pkgstore.datahub.io/core/s-and-p-500-companies/constituents_json/data/297344d8dc0a9d86b8d107449c851cc8/constituents_json.json"
 
@@ -165,9 +172,9 @@ $( function() {
     });
   } );
 
-recentSearchListEl.children().on("click", async function(event) {
+recentSearchListEl.on("click", "button", async function(event) {
     event.preventDefault();
-    var symbol = event.target.text;
+    var symbol = $(event.target).text;
     var data = await getStockDataBySymbol(symbol);
     console.log("Symbol");
     showStockData(data);
