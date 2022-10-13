@@ -18,7 +18,8 @@ var recentSearchListEl = $("#recent-stock-list");
 var relatedTitleEl = $("#related-title");
 var sp500Data;
 var autoCompleteOptions;
-var apiKey = "SX5NRTu0oVANGftCAgnWfnQxSDFKaxHD";
+var apiKey = "AQ18hJwsyCswiT1OwSOmu0_nFzBv6NuQ";
+var savedSearches = JSON.parse(localStorage.getItem("savedSearches")) || [];
 
 // Date
 var lastWeekDay = new Date();
@@ -155,6 +156,7 @@ function clearPage() {
     if (relatedTitleEl.children().length > 0) {
         relatedTitleEl.children().empty();
     };
+    $("#sectorStocks").children().text("");
 };
 
 async function init () {
