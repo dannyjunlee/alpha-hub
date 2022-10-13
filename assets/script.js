@@ -1,27 +1,20 @@
 // DEPENDENCIES
 // API - Polygon.io (for stock data)
 // var polygonURL = "https://api.polygon.io/v1/open-close/AAPL/2022-10-11?adjusted=true&apiKey=2MYBRhMYEstgP3SY5prEcQsMFsRc40TO"
-// fetch(polygonURL)
-//     .then(function (response) {
-//         return response.json();
-//     })
-
-//     .then(function (data) {
-//         console.log(data);
-//     })
-
 // API - SerpAPI (for Google Trends)
 
 var searchInputEl = $("#stock-name");
 var searchButtonEl = $(".pure-button");
 var recentSearchListEl = $("#recent-stock-list");
 var relatedTitleEl = $("#related-title");
+
+// DATA
 var sp500Data;
 var autoCompleteOptions;
 var apiKey = "AQ18hJwsyCswiT1OwSOmu0_nFzBv6NuQ";
 var savedSearches = JSON.parse(localStorage.getItem("savedSearches")) || [];
 
-// Date
+    // Date
 var lastWeekDay = new Date();
 var yesterday = new Date();
 var dateOptions = {
@@ -47,32 +40,9 @@ lastWeekDay =
     ("0" + (lastWeekDay.getMonth()+1)).slice(-2) + "-" +
     ("0" + lastWeekDay.getDate()).slice(-2);
 
-// DATA
-// Datahub.io JSON - list of all stocks in S&P 500 with stock name, ticker, and sector
-// var datahubURL = "https://pkgstore.datahub.io/core/s-and-p-500-companies/constituents_json/data/297344d8dc0a9d86b8d107449c851cc8/constituents_json.json"
-// fetch(datahubURL)
-//     .then(function (response) {
-//         return response.json();
-//     })
-
-//     .then(function (data) {
-//         console.log(data);
-//     })
-
 // FUNCTION
-// Fetch stock/sector data from Datahub.io JSON
-// If it is single stock name/ticker, use Polygon.io API to retrieve stock data
-// Use SerpAPI to get investor sentiment on the stock/sector
-// Save search to local storage and append as re-searchable list item underneath search
 
-// function that makes a fetch call to datahub API and gets list of S&P 500 stocks
-// $(document).ready(function () {
-//     recentSearchListEl = JSON.parse(localStorage.getItem("recent-stock-list"));
-//     cityArray.forEach(city =>{
-//       printSearch(city);
-//     })
-//   });
-
+    // Get the S&P500 Data from Datahub.io
 async function getSP500Data() {
     var datahubURL = "https://pkgstore.datahub.io/core/s-and-p-500-companies/constituents_json/data/297344d8dc0a9d86b8d107449c851cc8/constituents_json.json"
 
@@ -81,6 +51,7 @@ async function getSP500Data() {
     
 };
 
+    // Dropdown shows possible options to select from
 function getAutoCompleteOptions() {
     var sp500Data = JSON.parse(localStorage.getItem("sp500Data"));
     var options = [];
@@ -90,8 +61,8 @@ function getAutoCompleteOptions() {
     return options;
 };
 
-// function that takes in a sector, searches datahub data and returns a list of stocks that match that sector
 
+    // Taking sector searched and returning other data with same sector
 function getSymbolsMatchingSector(searchSector, sp500Data) {
     console.log(searchSector, sp500Data);
     var matches = [];
@@ -103,7 +74,7 @@ function getSymbolsMatchingSector(searchSector, sp500Data) {
     return matches;
 };
 
-// function that takes in a stock symbol, makes a fetch call to polygon API, and returns data on that stock
+    // function that takes in a stock symbol, makes a fetch call to polygon API, and returns data on that stock
 async function getStockDataBySymbol(symbol) {
     // Make sure date will update dynamically too
     var polygonURL = "https://api.polygon.io/v1/open-close/" + symbol.toUpperCase() + "/" + lastWeekDay + "?adjusted=true&apiKey=" + apiKey;
@@ -115,12 +86,10 @@ async function getStockDataBySymbol(symbol) {
     return data;
 };
 
+    // Displays stock data on page
 function showStockData(data) {
     console.log(data.status)
-    // Name here (from the DataHub.io)
-    // show some stock data if the status is ok
-    // show a not found message if it's not
-    if (data.status==="OK"){
+    if (data.status === "OK") {
         var dataSet = JSON.parse(localStorage.getItem("sp500Data"));
         for (let i = 0; i < dataSet.length; i++) {
             if (data.symbol == dataSet[i].Symbol) {
@@ -134,7 +103,6 @@ function showStockData(data) {
         var liHigh = $("<div>").text("High: $" + data.high).attr("id", "current-high");
         var liLow = $("<div>").text("Low: $" + data.low).attr("id", "current-low");
         var liClose = $("<div>").text("Close: $" + data.close).attr("id", "current-close");
-        // FORMAT!!!
         var liVolume = $("<div>").text(data.volume);
         $("#current").append(liTicker);
         $("#current").append(liDate);
@@ -143,14 +111,6 @@ function showStockData(data) {
         $("#current").append(liLow);
         $("#current").append(liClose);
         $("#current").append(liVolume);
-
-        // Append to recent searches
-        // var liTickerBtn = $("<button>").text(data.symbol);
-        // $("#recent-stock-list").append(liTickerBtn);
-
-        // If ANY of the list elements in recent searches list contains the symbol
-        // Do NOT place a new button
-        // Else DO place a new button
 
         var index = 0;
 
@@ -177,12 +137,12 @@ function showStockData(data) {
                 sectorStocks.append(sectorStockBtn);
             }
         };
+    } else{
+            $("#current").append("<h2>Invalid Stock</h2>").attr("id", "invalid-stock");
+        }
+};
 
-    // Show related stocks in related stocks section
-    // Probably use for loop to go through datahub.io dataset for matching sectors
-    // Or use getSymbolsMatchingSector() function
-}};
-
+    // Render saved searches from localStorage to recent searches section
 function renderSearches() {
     recentSearchListEl.children().text("");
     for (let i = 0; i < savedSearches.length; i++) {
@@ -194,7 +154,7 @@ function renderSearches() {
     };
 };
 
-// Function to clear page and reset to default values upon update of page information
+    // Function to clear page and reset to default values upon update of page information
 function clearPage() {
     searchInputEl.text("Search");
     $("#current").text("");
@@ -203,10 +163,8 @@ function clearPage() {
     };
 };
 
+    // Init to run on page load
 async function init () {
-    // If localstorage getitem (key) returns undefined,
-    // Call getsp500data function
-    // otherwise it's ready to be used
     if (!localStorage.getItem("sp500Data")) {
         sp500Data =  await getSP500Data();
         localStorage.setItem("sp500Data", JSON.stringify(sp500Data));
@@ -214,26 +172,10 @@ async function init () {
     }
     renderSearches();
     autoCompleteOptions = getAutoCompleteOptions()
-
-
-
-    // var searchResults = getSymbolsMatchingSector('Industrials', sp500Data);
-    // var stockData = {
-    //     exp: Date.now() + (300 * 1000),
-    //     data: sp500Data
-    // }
-
-    // for (let symbol of searchResults) {
-
-    //     var stockData = await getStockDataBySymbol(symbol);
-    //     // rate limited 5 requests / min
-    //     console.log(stockData); 
-    // }
-
 };
 
 // USER INTERACTION
-// User inputs stock or sector name and presses “Search”
+    // User inputs stock or sector name and presses “Search”
 searchButtonEl.on("click", async function(event) {
     event.preventDefault();
     clearPage();
@@ -244,14 +186,14 @@ searchButtonEl.on("click", async function(event) {
     showStockData(data);
 });
 
-init();
-
+    // Autocomplete dropdown menu
 $( function() {
     $( "#stock-name" ).autocomplete({
       source: autoCompleteOptions
     });
   } );
 
+    // User clicks on a button on recent search list
 recentSearchListEl.on("click", "button", async function(event) {
     event.preventDefault();
     clearPage();
@@ -261,9 +203,16 @@ recentSearchListEl.on("click", "button", async function(event) {
     showStockData(data);
 });
 
-// RELATEDSTOCKS.on("click", function(event){
-//     showStockData(event);
+    // User clicks on related stocks to show info on page
+// $("#sectorStocks").on("click", "button", async function(event) {
+//     event.preventDefault();
+//     clearPage();
+//     var symbolIndex = $(event.target).val().split(" - ");
+//     var symbol = symbolIndex[1];
+//     var data = await getStockDataBySymbol(symbol);
+//     console.log("Symbol");
+//     showStockData(data);
 // });
+
 // INITIALIZATION
-
-
+init();
