@@ -18,7 +18,7 @@ var recentSearchListEl = $("#recent-stock-list");
 var relatedTitleEl = $("#related-title");
 var sp500Data;
 var autoCompleteOptions;
-var apiKey = "SX5NRTu0oVANGftCAgnWfnQxSDFKaxHD";
+var apiKey = "LTUSnoXHn7D2TptGlI2Us7u3R7nO2efZ";
 
 // Date
 var lastWeekDay = new Date();
@@ -38,8 +38,6 @@ if (yesterday.getDate() == 6) {
 } else {
     lastWeekDay.setDate(lastWeekDay.getDate()-1);
 };
-
-console.log(("0" + (lastWeekDay.getMonth()+1)).slice(-2));
 
 lastWeekDay = 
     lastWeekDay.getFullYear() + "-" + 
@@ -117,9 +115,55 @@ async function getStockDataBySymbol(symbol) {
 function showStockData(data) {
     console.log(data.status)
     // Name here (from the DataHub.io)
+<<<<<<< HEAD
     // show some stock data if the status is ok
     // show a not found message if it's not
     if (data.status==="OK"){
+=======
+    var dataSet = JSON.parse(localStorage.getItem("sp500Data"));
+    for (let i = 0; i < dataSet.length; i++) {
+        if (data.symbol == dataSet[i].Symbol) {
+            $("#current").append($("<div>").text(dataSet[i].Name).attr("id", "current-name"));
+            $("#related-title").append($("<div>").text(dataSet[i].Sector));
+        };
+    };
+    var liTicker = $("<div>").text("Symbol: " + data.symbol).attr("id", "current-symbol");
+    var liDate = $("<div>").text(data.from).attr("id", "current-date");
+    var liOpen = $("<div>").text("Open: $" + data.open).attr("id", "current-open");
+    var liHigh = $("<div>").text("High: $" + data.high).attr("id", "current-high");
+    var liLow = $("<div>").text("Low: $" + data.low).attr("id", "current-low");
+    var liClose = $("<div>").text("Close: $" + data.close).attr("id", "current-close");
+    // FORMAT!!!
+    var liVolume = $("<div>").text(data.volume);
+    $("#current").append(liTicker);
+    $("#current").append(liDate);
+    $("#current").append(liOpen);
+    $("#current").append(liHigh);
+    $("#current").append(liLow);
+    $("#current").append(liClose);
+    $("#current").append(liVolume);
+
+    // Append to recent searches
+    // var liTickerBtn = $("<button>").text(data.symbol);
+    // $("#recent-stock-list").append(liTickerBtn);
+
+    // If ANY of the list elements in recent searches list contains the symbol
+    // Do NOT place a new button
+    // Else DO place a new button
+
+    var index = 0;
+
+    for (let i = 0; i < $("#recent-stock-list").children().length; i++) {
+        if ($("#recent-stock-list").children().eq(i).text() == data.symbol) {
+            index++;
+        };
+    };
+
+    if (index === 0) {
+        var liTickerBtn = $("<button>").text(data.symbol);
+        $("#recent-stock-list").append(liTickerBtn);
+    };
+>>>>>>> ecf7a97e4d06ddff230106ee5ad1b2af93b71d66
 
     
         var dataSet = JSON.parse(localStorage.getItem("sp500Data"));
@@ -155,6 +199,19 @@ function showStockData(data) {
     // Show related stocks in related stocks section
     // Probably use for loop to go through datahub.io dataset for matching sectors
     // Or use getSymbolsMatchingSector() function
+
+    var sectorName = $("#related-title").children().eq(0).text();
+    var sectorStocks = $("#sectorStocks");
+
+    for (let i = 0; i < dataSet.length; i++) {
+        if (dataSet[i].Sector == sectorName) {
+            console.log(dataSet[i].Name);
+            var sectorStockBtn = $("<button>").text(dataSet[i].Name + " - " + dataSet[i].Symbol);
+            sectorStocks.append(sectorStockBtn);
+        }
+    }
+
+
 };
 
 // Function to clear page and reset to default values upon update of page information
@@ -214,8 +271,9 @@ $( function() {
     });
   } );
 
-recentSearchListEl.on("click", "button", async function(event) {
+$("#recent-stock-list").on("click", "button", async function(event) {
     event.preventDefault();
+    clearPage();
     var symbol = $(event.target).text();
     var data = await getStockDataBySymbol(symbol);
     console.log("Symbol");
@@ -226,5 +284,4 @@ recentSearchListEl.on("click", "button", async function(event) {
 //     showStockData(event);
 // });
 // INITIALIZATION
-
 
