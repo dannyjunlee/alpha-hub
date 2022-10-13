@@ -114,53 +114,61 @@ async function getStockDataBySymbol(symbol) {
 };
 
 function showStockData(data) {
+    console.log(data.status)
     // Name here (from the DataHub.io)
-    var dataSet = JSON.parse(localStorage.getItem("sp500Data"));
-    for (let i = 0; i < dataSet.length; i++) {
-        if (data.symbol == dataSet[i].Symbol) {
-            $("#current").append($("<div>").text(dataSet[i].Name).attr("id", "current-name"));
-            $("#related-title").append($("<div>").text(dataSet[i].Sector));
+    // show some stock data if the status is ok
+    // show a not found message if it's not
+    if (data.status==="OK"){
+        var dataSet = JSON.parse(localStorage.getItem("sp500Data"));
+        for (let i = 0; i < dataSet.length; i++) {
+            if (data.symbol == dataSet[i].Symbol) {
+                $("#current").append($("<div>").text(dataSet[i].Name).attr("id", "current-name"));
+                $("#related-title").append($("<div>").text(dataSet[i].Sector));
+            };
         };
-    };
-    var liTicker = $("<div>").text("Symbol: " + data.symbol).attr("id", "current-symbol");
-    var liDate = $("<div>").text(data.from).attr("id", "current-date");
-    var liOpen = $("<div>").text("Open: $" + data.open).attr("id", "current-open");
-    var liHigh = $("<div>").text("High: $" + data.high).attr("id", "current-high");
-    var liLow = $("<div>").text("Low: $" + data.low).attr("id", "current-low");
-    var liClose = $("<div>").text("Close: $" + data.close).attr("id", "current-close");
-    // FORMAT!!!
-    var liVolume = $("<div>").text(data.volume);
-    $("#current").append(liTicker);
-    $("#current").append(liDate);
-    $("#current").append(liOpen);
-    $("#current").append(liHigh);
-    $("#current").append(liLow);
-    $("#current").append(liClose);
-    $("#current").append(liVolume);
+        var liTicker = $("<div>").text("Symbol: " + data.symbol).attr("id", "current-symbol");
+        var liDate = $("<div>").text(data.from).attr("id", "current-date");
+        var liOpen = $("<div>").text("Open: $" + data.open).attr("id", "current-open");
+        var liHigh = $("<div>").text("High: $" + data.high).attr("id", "current-high");
+        var liLow = $("<div>").text("Low: $" + data.low).attr("id", "current-low");
+        var liClose = $("<div>").text("Close: $" + data.close).attr("id", "current-close");
+        // FORMAT!!!
+        var liVolume = $("<div>").text(data.volume);
+        $("#current").append(liTicker);
+        $("#current").append(liDate);
+        $("#current").append(liOpen);
+        $("#current").append(liHigh);
+        $("#current").append(liLow);
+        $("#current").append(liClose);
+        $("#current").append(liVolume);
 
-    // Append to recent searches
-    // var liTickerBtn = $("<button>").text(data.symbol);
-    // $("#recent-stock-list").append(liTickerBtn);
+        // Append to recent searches
+        // var liTickerBtn = $("<button>").text(data.symbol);
+        // $("#recent-stock-list").append(liTickerBtn);
 
-    // If ANY of the list elements in recent searches list contains the symbol
-    // Do NOT place a new button
-    // Else DO place a new button
+        // If ANY of the list elements in recent searches list contains the symbol
+        // Do NOT place a new button
+        // Else DO place a new button
 
-    var index = 0;
+        var index = 0;
 
-    for (let i = 0; i < $("#recent-stock-list").children().length; i++) {
-        if ($("#recent-stock-list").children().eq(i).text() == data.symbol) {
-            index++;
+        for (let i = 0; i < $("#recent-stock-list").children().length; i++) {
+            if ($("#recent-stock-list").children().eq(i).text() == data.symbol) {
+                index++;
+            };
         };
-    };
 
-    if (index === 0) {
-        var liTickerBtn = $("<button>").text(data.symbol);
-        $("#recent-stock-list").append(liTickerBtn);
+        if (index === 0) {
+            var liTickerBtn = $("<button>").text(data.symbol);
+            $("#recent-stock-list").append(liTickerBtn);
         savedSearches.push(data.symbol);
         localStorage.setItem("savedSearches", JSON.stringify(savedSearches));
-    };
+        };
 
+        
+    }else{
+        $("#current").append("<h2>Invalid Stock</h2>");
+    }
     // Show related stocks in related stocks section
     // Probably use for loop to go through datahub.io dataset for matching sectors
     // Or use getSymbolsMatchingSector() function
@@ -264,3 +272,4 @@ $("#recent-stock-list").on("click", "button", async function(event) {
 // });
 // INITIALIZATION
 
+// hello
