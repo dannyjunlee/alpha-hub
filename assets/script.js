@@ -186,7 +186,6 @@ function clearPage() {
     if (relatedTitleEl.children().length > 0) {
         relatedTitleEl.children().empty();
     };
-    $("#sectorStocks").children().text("");
 };
 
 function renderSearches() {
