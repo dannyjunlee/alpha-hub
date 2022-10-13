@@ -14,7 +14,9 @@
 
 var searchInputEl = $("#stock-name");
 var searchButtonEl = $(".pure-button");
-var recentSearchListEl = $("#stock-list");
+var recentSearchListEl = $("#recent-stock-list");
+var sp500Data;
+var autoCompleteOptions;
 
 // DATA
 // Datahub.io JSON - list of all stocks in S&P 500 with stock name, ticker, and sector
@@ -43,6 +45,15 @@ async function getSP500Data() {
     
 }
 
+function getAutoCompleteOptions() {
+    var sp500Data = JSON.parse(localStorage.getItem("sp500Data"));
+    var options = [];
+    for (var i = 0; i < sp500Data.length; i++) {
+        options.push(sp500Data[i].Symbol + " - " + sp500Data[i].Name);
+    }
+    return options;
+}
+
 // function that takes in a sector, searches datahub data and returns a list of stocks that match that sector
 
 function getSymbolsMatchingSector(searchSector, sp500Data) {
@@ -59,7 +70,7 @@ function getSymbolsMatchingSector(searchSector, sp500Data) {
 // function that takes in a stock symbol, makes a fetch call to polygon API, and returns data on that stock
 async function getStockDataBySymbol(symbol) {
     // Make sure date will update dynamically too
-    var polygonURL = "https://api.polygon.io/v1/open-close/" + symbol + "/2022-10-11?adjusted=true&apiKey=FlToY1WBGF5kiYC7dn85gxRAV3UviYAQ"
+    var polygonURL = "https://api.polygon.io/v1/open-close/" + symbol.toUpperCase() + "/2022-10-11?adjusted=true&apiKey=FlToY1WBGF5kiYC7dn85gxRAV3UviYAQ"
 
 
     var response = await fetch(polygonURL);
@@ -94,8 +105,8 @@ function showStockData(data) {
     $("#current").append(liVolume);
 
     // Append to recent searches
-    var liTickerBtn = $("<li>").text(data.symbol);
-    recentSearchListEl.append(liTickerBtn);
+    var liTickerBtn = $("<button>").text(data.symbol);
+    $("#recent-stock-list").append(liTickerBtn);
 
     // Show related stocks in related stocks section
     // Probably use for loop to go through datahub.io dataset for matching sectors
@@ -111,9 +122,14 @@ async function init () {
     // If localstorage getitem (key) returns undefined,
     // Call getsp500data function
     // otherwise it's ready to be used
-    var sp500Data =  await getSP500Data();
-    localStorage.setItem("sp500Data", JSON.stringify(sp500Data));
-    console.log(sp500Data);
+    if (!localStorage.getItem("sp500Data")) {
+        sp500Data =  await getSP500Data();
+        localStorage.setItem("sp500Data", JSON.stringify(sp500Data));
+        console.log("Stored S&P Data in Local Storage");
+    }
+    autoCompleteOptions = getAutoCompleteOptions()
+
+
 
     // var searchResults = getSymbolsMatchingSector('Industrials', sp500Data);
     // var stockData = {
@@ -135,12 +151,31 @@ async function init () {
 searchButtonEl.on("click", async function(event) {
     event.preventDefault();
     console.log(searchInputEl.val());
-    var symbol = searchInputEl.val();
+    var symbol = searchInputEl.val().split(" - ")[0];
     var data = await getStockDataBySymbol(symbol);
     console.log("Symbol");
     showStockData(data);
 });
 
-// INITIALIZATION
 init();
+
+$( function() {
+    $( "#stock-name" ).autocomplete({
+      source: autoCompleteOptions
+    });
+  } );
+
+recentSearchListEl.children().on("click", async function(event) {
+    event.preventDefault();
+    var symbol = event.target.text;
+    var data = await getStockDataBySymbol(symbol);
+    console.log("Symbol");
+    showStockData(data);
+});
+
+// RELATEDSTOCKS.on("click", function(event){
+//     showStockData(event);
+// });
+// INITIALIZATION
+
 
