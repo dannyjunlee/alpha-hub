@@ -133,7 +133,7 @@ function showStockData(data) {
         for (let i = 0; i < dataSet.length; i++) {
             if (dataSet[i].Sector == sectorName) {
                 console.log(dataSet[i].Name);
-                var sectorStockBtn = $("<button>").text(dataSet[i].Name + " - " + dataSet[i].Symbol);
+                var sectorStockBtn = $("<button>").text(dataSet[i].Name + " - " + dataSet[i].Symbol).attr("id", "related-button");
                 sectorStocks.append(sectorStockBtn);
             }
         };
