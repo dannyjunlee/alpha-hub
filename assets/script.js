@@ -158,6 +158,9 @@ function showStockData(data) {
         $("#recent-stock-list").append(liTickerBtn);
     };
 
+    
+
+
     // Show related stocks in related stocks section
     // Probably use for loop to go through datahub.io dataset for matching sectors
     // Or use getSymbolsMatchingSector() function
