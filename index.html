@@ -17,42 +17,44 @@
     <header>
         <h1>AlphaHub</h1>
     </header>
-
-    <aside>
-        <div class="container">
-            <div class="row">
-              <div class="col">
-                <h2>Stock Search</h2>
-                <br />
-                <form id="search-form">
-                  <div class="search-group row">
-                    <div class="col">
-                      <input type="text" onfocus="this.value=''" class="search-control" id="stock-name" placeholder="Enter stock symbol or name here"/>
+    <main>
+      <aside>
+          <div class="container">
+              <div class="row">
+                <div class="col">
+                  <h2>Stock Search</h2>
+                  <br />
+                  <form id="search-form">
+                    <div class="search-group row">
+                      <div class="col">
+                        <input type="text" onfocus="this.value=''" class="search-control" id="stock-name" placeholder="Enter stock symbol or name here"/>
+                      </div>
                     </div>
-                  </div>
-                  <button class="pure-button pure-button-primary">Search</button>
-                </form>
-              </div>
-            </div>
-            <div>
-                <div id="recent-searches">
-                  <h3>RECENT SEARCHES</h3>
-                    <br />
-                    <ul class="list-group" id="recent-stock-list">
-                    </ul>
+                    <button class="pure-button pure-button-primary">Search</button>
+                  </form>
                 </div>
-            </div>
-        </div>
-    </aside>
+              </div>
+              <div>
+                  <div id="recent-searches">
+                    <h3>RECENT SEARCHES</h3>
+                      <br />
+                      <ul class="list-group" id="recent-stock-list">
+                      </ul>
+                  </div>
+              </div>
+          </div>
+      </aside>
 
-    <section id="current">
-        <div id="current-name">SEARCH A STOCK TO SEE THE DATA</div>
-    </section>
+      <section id="current">
+        <div id="current-title">SEARCH A STOCK TO SEE THE DATA</div>  
+        <div id="current-name"></div>
+      </section>
 
-    <section id="related">
-        <h3 id="related-title">RELATED STOCKS</h3>
-        <div id="sectorStocks"></div>
-    </section>
+      <section id="related">
+          <h3 id="related-title">RELATED STOCKS</h3>
+          <div id="sectorStocks"></div>
+      </section>
+  </main>
 </body>
 
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
