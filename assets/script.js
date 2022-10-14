@@ -42,7 +42,6 @@ async function getSP500Data() {
 
     var response = await fetch(datahubURL);
     return await response.json();
-    
 };
 
     // Dropdown shows possible options to select from
@@ -175,7 +174,7 @@ $( function() {
     $( "#stock-name" ).autocomplete({
       source: autoCompleteOptions
     });
-  } );
+});
 
     // User clicks on a button on recent search list
 recentSearchListEl.on("click", "button", async function(event) {
