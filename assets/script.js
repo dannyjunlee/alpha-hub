@@ -69,7 +69,6 @@ function getSymbolsMatchingSector(searchSector, sp500Data) {
             matches.push(sp500Data[i].Symbol);
         }
     }
-    console.log(matches);
     return matches;
 };
 
@@ -89,10 +88,12 @@ async function getStockDataBySymbol(symbol) {
 function showStockData(data) {
     if (data.status === "OK") {
         var dataSet = JSON.parse(localStorage.getItem("sp500Data"));
+        var sectorName;
         for (let i = 0; i < dataSet.length; i++) {
             if (data.symbol == dataSet[i].Symbol) {
                 $("#current").append($("<div>").text(dataSet[i].Name).attr("id", "current-name"));
                 $("#related-title").append($("<div>").text(dataSet[i].Sector));
+                sectorName = dataSet[i].Sector;
             };
         };
         var liTicker = $("<div>").text("Symbol: " + data.symbol).attr("id", "current-symbol");
@@ -125,24 +126,15 @@ function showStockData(data) {
             localStorage.setItem("savedSearches", JSON.stringify(savedSearches));
         };
 
-        var sectorName = $("#related-title").children().eq(0).text();
         var sectorStocks = $("#sectorStocks");
-
-        var getSymbols = getSymbolsMatchingSector(sectorName, dataSet);
-        for (let i = 0; i < getSymbols.length; i++) {
-            var sectorStockBtn = $("<button>").text(getSymbols[i]).attr("id", "related-button");
-            sectorStocks.append(sectorStockBtn);
-        };
-
-        console.log(sectorStocks.children().length);
     
-        // for (let i = 0; i < dataSet.length; i++) {
-        //     if (dataSet[i].Sector == sectorName) {
-        //         console.log(dataSet[i].Name);
-        //         var sectorStockBtn = $("<button>").text(dataSet[i].Name + " - " + dataSet[i].Symbol).attr("id", "related-button");
-        //         sectorStocks.append(sectorStockBtn);
-        //     };
-        // };
+        for (let i = 0; i < dataSet.length; i++) {
+            if (dataSet[i].Sector == sectorName) {
+                console.log(dataSet[i].Name);
+                var sectorStockBtn = $("<button>").text(dataSet[i].Name + " - " + dataSet[i].Symbol).attr("id", "related-button");
+                sectorStocks.append(sectorStockBtn);
+            };
+        };
 
     } else{
             $("#current").append("<h2>Invalid Stock - Please Choose From the Autocomplete List</h2>").attr("id", "invalid-stock");
