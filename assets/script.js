@@ -80,7 +80,6 @@ async function getStockDataBySymbol(symbol) {
 
     var response = await fetch(polygonURL);
     var data = await response.json();
-    console.log(data);
     return data;
 };
 
@@ -102,7 +101,7 @@ function showStockData(data) {
         var liHigh = $("<div>").text("High: $" + data.high).attr("id", "current-high");
         var liLow = $("<div>").text("Low: $" + data.low).attr("id", "current-low");
         var liClose = $("<div>").text("Close: $" + data.close).attr("id", "current-close");
-        var liVolume = $("<div>").text(data.volume.toLocaleString()).attr("id", "current-volume");//added comma to integer
+        var liVolume = $("<div>").text(data.volume.toLocaleString()).attr("id", "current-volume");
         $("#current").append(liTicker);
         $("#current").append(liDate);
         $("#current").append(liOpen);
@@ -130,7 +129,6 @@ function showStockData(data) {
     
         for (let i = 0; i < dataSet.length; i++) {
             if (dataSet[i].Sector == sectorName) {
-                console.log(dataSet[i].Name);
                 var sectorStockBtn = $("<button>").text(dataSet[i].Name + " - " + dataSet[i].Symbol).attr("id", "related-button");
                 sectorStocks.append(sectorStockBtn);
             };
