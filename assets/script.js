@@ -209,7 +209,7 @@ $("#sectorStocks").on("click", "button", async function(event) {
     event.preventDefault();
     clearPage();
     var symbolIndex = $(event.target).text().split(" - ");
-    var symbol = symbolIndex[1];
+    var symbol = symbolIndex[1].trim();
     var data = await getStockDataBySymbol(symbol);
     console.log("Symbol");
     showStockData(data);
