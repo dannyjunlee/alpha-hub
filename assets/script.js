@@ -167,7 +167,6 @@ async function init () {
     if (!localStorage.getItem("sp500Data")) {
         sp500Data =  await getSP500Data();
         localStorage.setItem("sp500Data", JSON.stringify(sp500Data));
-        console.log("Stored S&P Data in Local Storage");
     }
     renderSearches();
     autoCompleteOptions = getAutoCompleteOptions()
@@ -178,10 +177,8 @@ async function init () {
 searchButtonEl.on("click", async function(event) {
     event.preventDefault();
     clearPage();
-    console.log(searchInputEl.val());
     var symbol = searchInputEl.val().split(" - ")[0];
     var data = await getStockDataBySymbol(symbol);
-    console.log("Symbol");
     showStockData(data);
 });
 
@@ -198,7 +195,6 @@ recentSearchListEl.on("click", "button", async function(event) {
     clearPage();
     var symbol = $(event.target).text();
     var data = await getStockDataBySymbol(symbol);
-    console.log("Symbol");
     showStockData(data);
 });
 
@@ -209,7 +205,6 @@ $("#sectorStocks").on("click", "button", async function(event) {
     var symbolIndex = $(event.target).text().split(" - ");
     var symbol = symbolIndex[1].trim();
     var data = await getStockDataBySymbol(symbol);
-    console.log("Symbol");
     showStockData(data);
 });
 
