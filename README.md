@@ -1,54 +1,38 @@
 # AlphaHub
 
-https://dannyjunlee.github.io/project1-group4/
+https://dannyjunlee.github.io/alpha-hub/
 <br><img src="assets/images/mainscreenshot.jpg" style="width:300px; height auto;">
 
 
 ## Description
 
-Provide a short description explaining the what, why, and how of your project. Use the following questions as a guide:
-
-- What was your motivation?
-- Why did you build this project? (Note: the answer is not "Because it was a homework assignment.")
-- What problem does it solve?
-- What did you learn?
-
-## Table of Contents (Optional)
-
-If your README is long, add a table of contents to make it easy for users to find what they need.
-
-- [Installation](#installation)
-- [Usage](#usage)
-- [Credits](#credits)
-- [License](#license)
-
-## Installation
-
-What are the steps required to install your project? Provide a step-by-step description of how to get the development environment running.
+This application is designed for users interested in starting to invest in stocks and looking to build a diversified portfolio (diversified referring to a portfolio of stocks consisting of diverse backgrounds/origin/classification/etc.). This tool helps users by presenting them with data for the stock they searched along with stocks from the S&P500 that align with the same sector, allowing the user to look through related stocks. The application is not designed for a user looking to conduct more advanced/in-depth analysis of stocks, as we simply provide cursory information in a format that is accessible to the beginner investor and in a way that is not easily found elsewhere (at least for free).
 
 ## Usage
 
-Provide instructions and examples for use. Include screenshots as needed.
+The user is greeted with a simple interface with an input box to enter the stock the user would like to see data for. The input box has an autocomplete function so that the user knows which stocks are valid choices.
+<br><img src="assets/images/autocompleteshot.jpg" style="width:300px; height auto;">
 
-To add a screenshot, create an `assets/images` folder in your repository and upload your screenshot to it. Then, using the relative filepath, add it to your README using the following syntax:
+When the user selects a valid stock and submits using the search button that stock's data is presented, including the symbol, data date, open, close, high, low, and volume for that date (previous day's final information).
+<br><img src="assets/images/searchedshot.jpg" style="width:300px; height auto;">
 
-    ```md
-    ![alt text](assets/images/screenshot.png)
-    ```
+The searched stock is also added to the recent searches list for easy access in the future.
+<br><img src="assets/images/recentlistshot.jpg" style="width:300px; height auto;">
+
+Upon searching a stock a list of all related S&P500 stocks of the same sector appear which the user can also click on in order to view that stock's data.
+<br><img src="assets/images/relatedshot.jpg" style="width:300px; height auto;">
+
 
 ## Credits
 
-List your collaborators, if any, with links to their GitHub profiles.
-
-If you used any third-party assets that require attribution, list the creators with links to their primary web presence in this section.
-
-If you followed tutorials, include links to those here as well.
+This application utilizes the Polygon.io and DataHub.io server-side API's to acquire stock data and match the stocks with others in the same sector.
+It incorporated fonts from Google Fonts and CSS Framework styling for the search button and autocomplete list from PureCSS.io and jQueryUI.com.
 
 ## License
 
 MIT License
 
-Copyright (c) [year] [fullname]
+Copyright (c) 2022 Valeria Alarcon, Joshua Espinal, Veronica Garcia, Jackson Impellizeri, Danny Jun Lee
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
