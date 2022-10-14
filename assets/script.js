@@ -34,8 +34,6 @@ if (yesterday.getDate() == 6) {
     lastWeekDay.setDate(lastWeekDay.getDate()-1);
 };
 
-console.log(("0" + (lastWeekDay.getMonth()+1)).slice(-2));
-
 lastWeekDay = 
     lastWeekDay.getFullYear() + "-" + 
     ("0" + (lastWeekDay.getMonth()+1)).slice(-2) + "-" +
@@ -136,11 +134,11 @@ function showStockData(data) {
                 console.log(dataSet[i].Name);
                 var sectorStockBtn = $("<button>").text(dataSet[i].Name + " - " + dataSet[i].Symbol).attr("id", "related-button");
                 sectorStocks.append(sectorStockBtn);
-            }
+            };
         };
     } else{
             $("#current").append("<h2>Invalid Stock - Please Choose From the Autocomplete List</h2>").attr("id", "invalid-stock");
-        }
+        };
 };
 
     // Render saved searches from localStorage to recent searches section
@@ -162,6 +160,7 @@ function clearPage() {
     if (relatedTitleEl.children().length > 0) {
         relatedTitleEl.children().empty();
     };
+    $("#sectorSTocks").empty();
 };
 
     // Init to run on page load
