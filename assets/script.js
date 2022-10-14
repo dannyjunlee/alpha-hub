@@ -102,7 +102,7 @@ function showStockData(data) {
         var liHigh = $("<div>").text("High: $" + data.high).attr("id", "current-high");
         var liLow = $("<div>").text("Low: $" + data.low).attr("id", "current-low");
         var liClose = $("<div>").text("Close: $" + data.close).attr("id", "current-close");
-        var liVolume = $("<div>").text(data.volume.toLocaleString()).attr("id", "current-volume");
+        var liVolume = $("<div>").text(data.volume.toLocaleString()).attr("id", "current-volume");//added comma to integer
         $("#current").append(liTicker);
         $("#current").append(liDate);
         $("#current").append(liOpen);
