@@ -9,6 +9,8 @@ var recentSearchListEl = $("#recent-stock-list");
 var relatedTitleEl = $("#related-title");
 var relatedStockListEl = $("#related-button");
 var clearSearchesButtonEl = $(".clear-recent-searches");
+var sectorStocks = $("#sectorStocks");
+var currentSection = $("#current");
 
 // DATA
 var sp500Data;
@@ -95,7 +97,7 @@ function showStockData(data) {
         var dataSet = JSON.parse(localStorage.getItem("sp500Data"));
         for (let i = 0; i < dataSet.length; i++) {
             if (data.symbol == dataSet[i].Symbol) {
-                $("#current").append($("<div>").text(dataSet[i].Name).attr("id", "current-name"));
+                currentSection.append($("<div>").text(dataSet[i].Name).attr("id", "current-name"));
                 $("#related-title").append($("<div>").text(dataSet[i].Sector));
             };
         };
@@ -106,13 +108,13 @@ function showStockData(data) {
         var liLow = $("<div>").text("Low: $" + data.low).attr("id", "current-low");
         var liClose = $("<div>").text("Close: $" + data.close).attr("id", "current-close");
         var liVolume = $("<div>").text(data.volume).attr("id", "current-volume");
-        $("#current").append(liTicker);
-        $("#current").append(liDate);
-        $("#current").append(liOpen);
-        $("#current").append(liHigh);
-        $("#current").append(liLow);
-        $("#current").append(liClose);
-        $("#current").append(liVolume);
+        currentSection.append(liTicker);
+        currentSection.append(liDate);
+        currentSection.append(liOpen);
+        currentSection.append(liHigh);
+        currentSection.append(liLow);
+        currentSection.append(liClose);
+        currentSection.append(liVolume);
 
         var index = 0;
 
@@ -130,7 +132,6 @@ function showStockData(data) {
         };
 
         var sectorName = $("#related-title").children().eq(0).text();
-        var sectorStocks = $("#sectorStocks");
     
         for (let i = 0; i < dataSet.length; i++) {
             if (dataSet[i].Sector == sectorName) {
@@ -140,7 +141,7 @@ function showStockData(data) {
             }
         };
     } else{
-            $("#current").append("<h2>Invalid Stock - Please Choose From the Autocomplete List</h2>").attr("id", "invalid-stock");
+            currentSection.append("<h2>Invalid Stock - Please Choose From the Autocomplete List</h2>").attr("id", "invalid-stock");
         }
 };
 
@@ -159,11 +160,17 @@ function renderSearches() {
     // Function to clear page and reset to default values upon update of page information
 function clearPage() {
     searchInputEl.text("Search");
-    $("#current").text("");
+    currentSection.text("");
     if (relatedTitleEl.children().length > 0) {
         relatedTitleEl.children().empty();
     };
+    var elem = $("<div>").attr("id", "current-name");
+    elem.text("Search for a stock to see the data");
+    currentSection.append(elem);
+    sectorStocks.empty();
+    $("#recent-stock-list").empty();
 };
+
 
     // Init to run on page load
 async function init () {
@@ -190,12 +197,14 @@ searchButtonEl.on("click", async function(event) {
 
 clearSearchesButtonEl.on("click", async function(event) {
     event.preventDefault();
+    localStorage.removeItem("savedSearches");
+    savedSearches = [];
     clearPage();
 })
 
     // Autocomplete dropdown menu
 $( function() {
-    $( "#stock-name" ).autocomplete({
+    searchInputEl.autocomplete({
       source: autoCompleteOptions
     });
   } );
@@ -211,7 +220,7 @@ recentSearchListEl.on("click", "button", async function(event) {
 });
 
     // User clicks on related stocks to show info on page
-$("#sectorStocks").on("click", "button", async function(event) {
+sectorStocks.on("click", "button", async function(event) {
     event.preventDefault();
     clearPage();
     var symbolIndex = $(event.target).text().split(" - ");
