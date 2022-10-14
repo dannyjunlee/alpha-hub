@@ -87,7 +87,6 @@ async function getStockDataBySymbol(symbol) {
 
     // Displays stock data on page
 function showStockData(data) {
-    console.log(data.status)
     if (data.status === "OK") {
         var dataSet = JSON.parse(localStorage.getItem("sp500Data"));
         for (let i = 0; i < dataSet.length; i++) {
