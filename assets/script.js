@@ -4,6 +4,9 @@ var searchButtonEl = $(".pure-button");
 var recentSearchListEl = $("#recent-stock-list");
 var relatedTitleEl = $("#related-title");
 var relatedStockListEl = $("#related-button");
+var clearSearchesButtonEl = $(".clear-recent-searches");
+var sectorStocks = $("#sectorStocks");
+var currentSection = $("#current");
 
 // DATA
 var sp500Data;
@@ -81,7 +84,7 @@ function showStockData(data) {
         var sectorName;
         for (let i = 0; i < dataSet.length; i++) {
             if (data.symbol == dataSet[i].Symbol) {
-                $("#current").append($("<div>").text(dataSet[i].Name).attr("id", "current-name"));
+                currentSection.append($("<div>").text(dataSet[i].Name).attr("id", "current-name"));
                 $("#related-title").append($("<div>").text(dataSet[i].Sector));
                 sectorName = dataSet[i].Sector;
             };
@@ -92,14 +95,14 @@ function showStockData(data) {
         var liHigh = $("<div>").text("High: $" + data.high).attr("id", "current-high");
         var liLow = $("<div>").text("Low: $" + data.low).attr("id", "current-low");
         var liClose = $("<div>").text("Close: $" + data.close).attr("id", "current-close");
-        var liVolume = $("<div>").text(data.volume.toLocaleString()).attr("id", "current-volume");
-        $("#current").append(liTicker);
-        $("#current").append(liDate);
-        $("#current").append(liOpen);
-        $("#current").append(liHigh);
-        $("#current").append(liLow);
-        $("#current").append(liClose);
-        $("#current").append(liVolume);
+        var liVolume = $("<div>").text(data.volume).attr("id", "current-volume");
+        currentSection.append(liTicker);
+        currentSection.append(liDate);
+        currentSection.append(liOpen);
+        currentSection.append(liHigh);
+        currentSection.append(liLow);
+        currentSection.append(liClose);
+        currentSection.append(liVolume);
 
         var index = 0;
 
@@ -116,7 +119,7 @@ function showStockData(data) {
             localStorage.setItem("savedSearches", JSON.stringify(savedSearches));
         };
 
-        var sectorStocks = $("#sectorStocks");
+        var sectorName = $("#related-title").children().eq(0).text();
     
         for (let i = 0; i < dataSet.length; i++) {
             if (dataSet[i].Sector == sectorName) {
@@ -126,8 +129,8 @@ function showStockData(data) {
         };
 
     } else{
-            $("#current").append("<h2>Invalid Stock - Please Choose From the Autocomplete List</h2>").attr("id", "invalid-stock");
-        };
+            currentSection.append("<h2>Invalid Stock - Please Choose From the Autocomplete List</h2>").attr("id", "invalid-stock");
+        }
 };
 
     // Render saved searches from localStorage to recent searches section
@@ -142,12 +145,17 @@ function renderSearches() {
     // Function to clear page and reset to default values upon update of page information
 function clearPage() {
     searchInputEl.text("Search");
-    $("#current").text("");
+    currentSection.text("");
     if (relatedTitleEl.children().length > 0) {
         relatedTitleEl.children().empty();
     };
-    $("#sectorStocks").empty();
+    var elem = $("<div>").attr("id", "current-name");
+    elem.text("Search for a stock to see the data");
+    currentSection.append(elem);
+    sectorStocks.empty();
+    $("#recent-stock-list").empty();
 };
+
 
     // Init to run on page load
 async function init () {
@@ -169,9 +177,16 @@ searchButtonEl.on("click", async function(event) {
     showStockData(data);
 });
 
+clearSearchesButtonEl.on("click", async function(event) {
+    event.preventDefault();
+    localStorage.removeItem("savedSearches");
+    savedSearches = [];
+    clearPage();
+})
+
     // Autocomplete dropdown menu
 $( function() {
-    $( "#stock-name" ).autocomplete({
+    searchInputEl.autocomplete({
       source: autoCompleteOptions
     });
 });
@@ -186,7 +201,7 @@ recentSearchListEl.on("click", "button", async function(event) {
 });
 
     // User clicks on related stocks to show info on page
-$("#sectorStocks").on("click", "button", async function(event) {
+sectorStocks.on("click", "button", async function(event) {
     event.preventDefault();
     clearPage();
     var symbolIndex = $(event.target).text().split(" - ");
