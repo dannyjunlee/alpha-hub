@@ -34,8 +34,6 @@ if (yesterday.getDate() == 6) {
     lastWeekDay.setDate(lastWeekDay.getDate()-1);
 };
 
-console.log(("0" + (lastWeekDay.getMonth()+1)).slice(-2));
-
 lastWeekDay = 
     lastWeekDay.getFullYear() + "-" + 
     ("0" + (lastWeekDay.getMonth()+1)).slice(-2) + "-" +
@@ -65,13 +63,13 @@ function getAutoCompleteOptions() {
 
     // Taking sector searched and returning other data with same sector
 function getSymbolsMatchingSector(searchSector, sp500Data) {
-    console.log(searchSector, sp500Data);
     var matches = [];
     for (var i = 0; i < sp500Data.length; i++) {
         if (sp500Data[i].Sector === searchSector) {
             matches.push(sp500Data[i].Symbol);
         }
     }
+    console.log(matches);
     return matches;
 };
 
@@ -89,7 +87,6 @@ async function getStockDataBySymbol(symbol) {
 
     // Displays stock data on page
 function showStockData(data) {
-    console.log(data.status)
     if (data.status === "OK") {
         var dataSet = JSON.parse(localStorage.getItem("sp500Data"));
         for (let i = 0; i < dataSet.length; i++) {
@@ -130,17 +127,26 @@ function showStockData(data) {
 
         var sectorName = $("#related-title").children().eq(0).text();
         var sectorStocks = $("#sectorStocks");
-    
-        for (let i = 0; i < dataSet.length; i++) {
-            if (dataSet[i].Sector == sectorName) {
-                console.log(dataSet[i].Name);
-                var sectorStockBtn = $("<button>").text(dataSet[i].Name + " - " + dataSet[i].Symbol).attr("id", "related-button");
-                sectorStocks.append(sectorStockBtn);
-            }
+
+        var getSymbols = getSymbolsMatchingSector(sectorName, dataSet);
+        for (let i = 0; i < getSymbols.length; i++) {
+            var sectorStockBtn = $("<button>").text(getSymbols[i]).attr("id", "related-button");
+            sectorStocks.append(sectorStockBtn);
         };
+
+        console.log(sectorStocks.children().length);
+    
+        // for (let i = 0; i < dataSet.length; i++) {
+        //     if (dataSet[i].Sector == sectorName) {
+        //         console.log(dataSet[i].Name);
+        //         var sectorStockBtn = $("<button>").text(dataSet[i].Name + " - " + dataSet[i].Symbol).attr("id", "related-button");
+        //         sectorStocks.append(sectorStockBtn);
+        //     };
+        // };
+
     } else{
             $("#current").append("<h2>Invalid Stock - Please Choose From the Autocomplete List</h2>").attr("id", "invalid-stock");
-        }
+        };
 };
 
     // Render saved searches from localStorage to recent searches section
@@ -162,6 +168,7 @@ function clearPage() {
     if (relatedTitleEl.children().length > 0) {
         relatedTitleEl.children().empty();
     };
+    $("#sectorStocks").empty();
 };
 
     // Init to run on page load
@@ -169,7 +176,6 @@ async function init () {
     if (!localStorage.getItem("sp500Data")) {
         sp500Data =  await getSP500Data();
         localStorage.setItem("sp500Data", JSON.stringify(sp500Data));
-        console.log("Stored S&P Data in Local Storage");
     }
     renderSearches();
     autoCompleteOptions = getAutoCompleteOptions()
@@ -180,10 +186,8 @@ async function init () {
 searchButtonEl.on("click", async function(event) {
     event.preventDefault();
     clearPage();
-    console.log(searchInputEl.val());
     var symbol = searchInputEl.val().split(" - ")[0];
     var data = await getStockDataBySymbol(symbol);
-    console.log("Symbol");
     showStockData(data);
 });
 
@@ -200,7 +204,6 @@ recentSearchListEl.on("click", "button", async function(event) {
     clearPage();
     var symbol = $(event.target).text();
     var data = await getStockDataBySymbol(symbol);
-    console.log("Symbol");
     showStockData(data);
 });
 
@@ -211,7 +214,6 @@ $("#sectorStocks").on("click", "button", async function(event) {
     var symbolIndex = $(event.target).text().split(" - ");
     var symbol = symbolIndex[1].trim();
     var data = await getStockDataBySymbol(symbol);
-    console.log("Symbol");
     showStockData(data);
 });
 
