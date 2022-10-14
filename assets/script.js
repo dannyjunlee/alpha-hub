@@ -63,7 +63,6 @@ function getAutoCompleteOptions() {
 
     // Taking sector searched and returning other data with same sector
 function getSymbolsMatchingSector(searchSector, sp500Data) {
-    console.log(searchSector, sp500Data);
     var matches = [];
     for (var i = 0; i < sp500Data.length; i++) {
         if (sp500Data[i].Sector === searchSector) {
@@ -127,14 +126,23 @@ function showStockData(data) {
 
         var sectorName = $("#related-title").children().eq(0).text();
         var sectorStocks = $("#sectorStocks");
-    
-        for (let i = 0; i < dataSet.length; i++) {
-            if (dataSet[i].Sector == sectorName) {
-                console.log(dataSet[i].Name);
-                var sectorStockBtn = $("<button>").text(dataSet[i].Name + " - " + dataSet[i].Symbol).attr("id", "related-button");
-                sectorStocks.append(sectorStockBtn);
-            };
+
+        var getSymbols = getSymbolsMatchingSector(sectorName, dataSet);
+        for (let i = 0; i < getSymbols.length; i++) {
+            var sectorStockBtn = $("<button>").text(getSymbols[i]).attr("id", "related-button");
+            sectorStocks.append(sectorStockBtn);
         };
+
+        console.log(sectorStocks.children().length);
+    
+        // for (let i = 0; i < dataSet.length; i++) {
+        //     if (dataSet[i].Sector == sectorName) {
+        //         console.log(dataSet[i].Name);
+        //         var sectorStockBtn = $("<button>").text(dataSet[i].Name + " - " + dataSet[i].Symbol).attr("id", "related-button");
+        //         sectorStocks.append(sectorStockBtn);
+        //     };
+        // };
+
     } else{
             $("#current").append("<h2>Invalid Stock - Please Choose From the Autocomplete List</h2>").attr("id", "invalid-stock");
         };
