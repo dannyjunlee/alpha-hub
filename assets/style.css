@@ -1,50 +1,57 @@
 * {
     box-sizing: border-box;
-    padding: 0;
+    font-family: 'League Spartan', sans-serif;
     margin: 0;
-    font-family: Arial, Helvetica, sans-serif;
+    padding: 0;
 }
 
-/* @font-face {
-    font-family: mine1;
-    src: url(LicensePlate.ttf);
-} */
+@font-face {
+    font-family: 'League Spartan', sans-serif;
+}
 
 body {
+    background-image: url("images/heroscreen.png");
     padding-top: 25px;
-    background-image: url("heroscreen.cc-V1-01282021-stock-market-wallpaper-HD\ \(1\).png");
 }
 
 header {
-    padding-top: 10px;
-    padding-bottom: 10px;
-    margin: auto;
-    margin-bottom: 10px;
-    text-align: center;
-    color: black;
+    background-image: url("images/newspaperbackground.jpg");
     border-top: 1px solid black;
     border-bottom: 1px solid black;
-    background-image: url("newspaperbackground.jpg");
+    color: black;
+    margin: auto;
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    text-align: center;
 }
 
 h1 {
-    font-family: mine1, Arial, Helvetica, sans-serif;
+    font-family: 'League Spartan', sans-serif;
     font-size: 60px;
-    font-weight: lighter;
+    font-weight: 400;
 }
 
 aside {
     float: left;
     width: 33%;
     height: auto;
-    padding: 10px;
+    padding: 30px;
 }
 
-h2, h3 {
-    font-family: mine1, Arial, Helvetica, sans-serif;
-    font-size: 32px;
-    font-weight: bold;
+h2 {
     color: white;
+    font-family: 'League Spartan', sans-serif;
+    font-size: 32px;
+    font-weight: 100;
+    margin-top: 10px;
+}
+
+h3 {
+    color: white;
+    font-family: 'League Spartan', sans-serif;
+    font-size: 21px;
+    font-weight: 500;
     margin-top: 10px;
 }
 
@@ -53,10 +60,11 @@ h2, h3 {
 }
 
 input {
-    font-size: 20px;
-    width: 100%;
-    height: 40px;
     box-shadow: 2px 2px 2px black;
+    font-size: 15px;
+    font-weight: 300;
+    height: 40px;
+    width: 100%;
 }
 
 #recent-searches {
@@ -70,17 +78,17 @@ input {
 }
 
 #recent-stock-list button {
-    font-size: 20px;
-    height: 32px;
-    padding: 2px;
-    width: 50%;
-    margin: 5px;
-    justify-self: center;
-    text-align: center;
     background-image: linear-gradient(rgb(220, 220, 220), white);
     border: 1px solid black;
     border-radius: 5px;
     cursor: pointer;
+    font-size: 20px;
+    height: 32px;
+    justify-self: center;
+    margin: 5px;
+    padding: 2px;
+    text-align: center;
+    width: 50%;
 }
 
 #recent-stock-list button:hover {
@@ -90,12 +98,14 @@ input {
 }
 
 .pure-button {
+    background-color: blue;
+    /* border: 1px solid white; */
+    box-shadow: 2px 2px 2px black;
+    font-size: 18px;
+    font-weight: 300;
     margin-top: 20px;
     margin-bottom: 20px;
     width: 100%;
-    background-color: blue;
-    border: 1px solid white;
-    box-shadow: 2px 2px 2px black;
 }
 
 .pure-button:hover {
@@ -103,90 +113,97 @@ input {
 }
 
 #current {
-    display: flex;
-    flex-flow: row wrap;
-    justify-content: space-between;
-    height: min-content;
-    min-height: 200px;
-    padding: 10px;
-    margin-bottom: 10px;
-    margin-right: 20px;
-    margin-left: 20px;
+    background-image: url("images/newspaperbackground.jpg");
     border: 2px solid black;
     border-radius: 15px;
     box-shadow: 2px 2px 2px black;
-    background-image: url("newspaperbackground.jpg");
+    display: flex;
+    flex-flow: row wrap;
     font-size: 32px;
     font-weight: bold;
+    height: min-content;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    margin-left: 20px;
+    margin-right: 20px;
+    min-height: 200px;
+    padding: 10px;
 }
 
 #current-name {
-    font-family: mine1, Arial, Helvetica, sans-serif;
-    font-size: larger;
     color: black;
-    margin: 10px;
+    font-family: 'League Spartan', sans-serif;
+    font-size: larger;
+    font-weight: 400;
     flex-basis: 100%;
+    margin: 10px;
     text-align: center;
 }
 
-#current-date, #current-symbol, #current-open, #current-close, #current-high, #current-low {
+#current-date, #current-symbol, #current-open, #current-close, #current-high, #current-low, #current-volume {
     font-size: 24px;
-    width: 200px;
+    font-weight: 100;
     height: 50px;
     margin: 5px;
+    width: 200px;
 }
 
 #related {
-    min-height: 200px;
-    padding: 10px;
-    display: flex;
-    flex-flow: row wrap;
-    justify-content: space-around;
-    align-items: center;
-    margin-bottom: 10px;
-    margin-right: 20px;
-    margin-left: 20px;
-    background-image: linear-gradient(rgb(220, 220, 220), white);
-    background-image: url("newspaperbackground.jpg");
+    align-items:flex-start;
+    background-image: url("images/newspaperbackground.jpg");
     border: 2px solid black;
     border-radius: 15px;
     box-shadow: 2px 2px 2px black;
+    display: flex;
+    flex-flow: row wrap;
     font-size: 32px;
     font-weight: bold;
+    justify-content: space-around;
+    margin-bottom: 10px;
+    margin-left: 20px;
+    margin-right: 20px;
+    min-height: 200px;
+    padding: 10px;
 }
 
 #related-title {
-    font-family: mine1, Arial, Helvetica, sans-serif;
-    font-size: 24;
-    font-weight: bold;
     color: black;
     flex-basis: 100%;
+    font-family: 'League Spartan', sans-serif;
+    font-size: 24;
+    font-weight: 400;
 }
 
-#related1, #related2, #related3 {
-    background-color: rgb(255, 255, 255);
+#sectorStocks {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+}
+
+#related-button {
+    background-color: white;
     border: 2px solid black;
     border-radius: 5px;
     box-shadow: 2px 2px 2px black;
-    width: fit-content;
-    min-width: 100px;
-    height: fit-content;
-    margin: 10px;
+    font-family: 'League Spartan', sans-serif;
+    font-size: 15px;
+    font-weight: 300;
+    height: 50px;
+    margin: 20px;
     padding: 5px;
-    font-size: 20px;
+    width: 200px;
 }
 
-#related1:hover, #related2:hover, #related3:hover {
-    scale: 105%;
-    font-size: 22px;
-    color: white;
+#related-button:hover {
     background-color: blue;
+    color: white;
+    scale: 105%;
 }
 
 @media screen and (max-width: 700px) {
     aside, main {
-        width: 100%;
         min-height: fit-content;
+        width: 100%;
         }
     h1 {
         font-size: 32px;
