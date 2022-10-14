@@ -8,6 +8,7 @@ var searchButtonEl = $(".pure-button");
 var recentSearchListEl = $("#recent-stock-list");
 var relatedTitleEl = $("#related-title");
 var relatedStockListEl = $("#related-button");
+var clearSearchesButtonEl = $(".clear-recent-searches");
 
 // DATA
 var sp500Data;
@@ -186,6 +187,11 @@ searchButtonEl.on("click", async function(event) {
     console.log("Symbol");
     showStockData(data);
 });
+
+clearSearchesButtonEl.on("click", async function(event) {
+    event.preventDefault();
+    clearPage();
+})
 
     // Autocomplete dropdown menu
 $( function() {
