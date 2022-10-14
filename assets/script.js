@@ -7,6 +7,7 @@ var searchInputEl = $("#stock-name");
 var searchButtonEl = $(".pure-button");
 var recentSearchListEl = $("#recent-stock-list");
 var relatedTitleEl = $("#related-title");
+var relatedStockListEl = $("#related-button");
 
 // DATA
 var sp500Data;
@@ -103,7 +104,7 @@ function showStockData(data) {
         var liHigh = $("<div>").text("High: $" + data.high).attr("id", "current-high");
         var liLow = $("<div>").text("Low: $" + data.low).attr("id", "current-low");
         var liClose = $("<div>").text("Close: $" + data.close).attr("id", "current-close");
-        var liVolume = $("<div>").text(data.volume);
+        var liVolume = $("<div>").text(data.volume).attr("id", "current-volume");
         $("#current").append(liTicker);
         $("#current").append(liDate);
         $("#current").append(liOpen);
@@ -133,12 +134,12 @@ function showStockData(data) {
         for (let i = 0; i < dataSet.length; i++) {
             if (dataSet[i].Sector == sectorName) {
                 console.log(dataSet[i].Name);
-                var sectorStockBtn = $("<button>").text(dataSet[i].Name + " - " + dataSet[i].Symbol);
+                var sectorStockBtn = $("<button>").text(dataSet[i].Name + " - " + dataSet[i].Symbol).attr("id", "related-button");
                 sectorStocks.append(sectorStockBtn);
             }
         };
     } else{
-            $("#current").append("<h2>Invalid Stock</h2>").attr("id", "invalid-stock");
+            $("#current").append("<h2>Invalid Stock - Please Choose From the Autocomplete List</h2>").attr("id", "invalid-stock");
         }
 };
 
@@ -204,15 +205,15 @@ recentSearchListEl.on("click", "button", async function(event) {
 });
 
     // User clicks on related stocks to show info on page
-// $("#sectorStocks").on("click", "button", async function(event) {
-//     event.preventDefault();
-//     clearPage();
-//     var symbolIndex = $(event.target).val().split(" - ");
-//     var symbol = symbolIndex[1];
-//     var data = await getStockDataBySymbol(symbol);
-//     console.log("Symbol");
-//     showStockData(data);
-// });
+$("#sectorStocks").on("click", "button", async function(event) {
+    event.preventDefault();
+    clearPage();
+    var symbolIndex = $(event.target).text().split(" - ");
+    var symbol = symbolIndex[1].trim();
+    var data = await getStockDataBySymbol(symbol);
+    console.log("Symbol");
+    showStockData(data);
+});
 
 // INITIALIZATION
 init();
