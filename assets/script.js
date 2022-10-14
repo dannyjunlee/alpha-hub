@@ -69,6 +69,7 @@ function getSymbolsMatchingSector(searchSector, sp500Data) {
             matches.push(sp500Data[i].Symbol);
         }
     }
+    console.log(matches);
     return matches;
 };
 
@@ -167,7 +168,7 @@ function clearPage() {
     if (relatedTitleEl.children().length > 0) {
         relatedTitleEl.children().empty();
     };
-    $("#sectorSTocks").empty();
+    $("#sectorStocks").empty();
 };
 
     // Init to run on page load
