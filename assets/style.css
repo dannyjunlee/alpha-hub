@@ -15,7 +15,7 @@ body {
 }
 
 header {
-    background-color: rgb(255, 85, 0);
+    background-color: rgba(0, 0, 0, 0.65);
     /* background-color: rgba(22, 23, 23, 0.43); */
     /* background-color: rgba(53, 119, 109, 0.584); */
     color: white;
@@ -28,17 +28,17 @@ header {
     text-align: left;
 }
 
-header:hover {
-    color: rgb(25, 165, 165);
-    transition: 500ms ease-in-out;
-}
-
 h1 {
     font-family: 'League Spartan', sans-serif;
     font-size: 100px;
     font-weight: 100;
     margin-left: 80px;
     margin-top: 40px;
+}
+
+h1:hover {
+    color: #87BBA2;
+    transition: 500ms ease-in-out;
 }
 
 main {
@@ -72,7 +72,7 @@ h2 {
 }
 
 h3 {
-    color: rgb(255, 215, 196);
+    color: #C9E4CA;
     font-family: 'League Spartan', sans-serif;
     font-size: 24px;
     font-weight: 500;
@@ -92,7 +92,7 @@ input {
     font-size: 18px;
     font-weight: 300;
     height: 40px;
-    width: 500px;
+    width: 480px;
     margin-top: 20px;
     padding: 20px;
 }
@@ -109,9 +109,11 @@ input {
 }
 
 #recent-stock-list button {
-    background-color: rgb(255, 215, 196);
+    background-color: #677a7c;
+    border: none;
     border-radius: 30px;
     cursor: pointer;
+    color: white;
     font-size: 17px;
     font-weight: 300;
     height: 32px;
@@ -119,13 +121,13 @@ input {
     margin: 5px;
     padding: 2px;
     text-align: center;
-    width: 15%;
+    width: 100px;
 }
 
 #recent-stock-list button:hover {
-    background-color:white;
+    background-color: white;
+    color:#3B6064;
     font-weight: 400;
-    /* scale: 102% */
 }
 
 .pure-button {
@@ -168,7 +170,7 @@ input {
 }
 
 #current-title {
-    color:rgb(255, 122, 56);
+    color:#C9E4CA;
     font-family: 'League Spartan', sans-serif;
     font-size: 75px;
     font-weight: 100;
@@ -230,7 +232,7 @@ input {
 
 
 #related-title {
-    color:rgb(255, 122, 56);
+    color:#C9E4CA;
     flex-basis: 100%;
     font-family: 'League Spartan', sans-serif;
     font-size: 32px;
@@ -251,7 +253,7 @@ input {
 }
 
 #related-button {
-    background-color: rgba(253, 148, 96, 0.8);
+    background-color: #87bba2d5;
     border: none;
     border-radius: 10px;
     color: white;
@@ -265,7 +267,7 @@ input {
 }
 
 #related-button:hover {
-    background-color: rgb(255, 118, 50);
+    background-color: #87BBA2;
     color: white;
     scale: 102%;
 }
