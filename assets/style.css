@@ -7,12 +7,12 @@
 
 @font-face {
     font-family: mine1;
-    src: url(LicensePlate.ttf);
+    src: url("fonts/LicensePlate.ttf");
 }
 
 body {
     padding-top: 25px;
-    background-image: url("heroscreen.cc-V1-01282021-stock-market-wallpaper-HD\ \(1\).png");
+    background-image: url("images/heroscreen.png");
 }
 
 header {
@@ -24,7 +24,7 @@ header {
     color: black;
     border-top: 1px solid black;
     border-bottom: 1px solid black;
-    background-image: url("newspaperbackground.jpg");
+    background-image: url("images/newspaperbackground.jpg");
 }
 
 h1 {
@@ -115,32 +115,9 @@ input {
     border: 2px solid black;
     border-radius: 15px;
     box-shadow: 2px 2px 2px black;
-    background-image: url("newspaperbackground.jpg");
+    background-image: url("images/newspaperbackground.jpg");
     font-size: 32px;
     font-weight: bold;
-}
-
-#invalid-stock h2 {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: min-content;
-    min-height: 200px;
-    padding: 10px;
-    margin-bottom: 10px;
-    margin-right: 20px;
-    margin-left: 20px;
-    border: 2px solid black;
-    border-radius: 15px;
-    box-shadow: 2px 2px 2px black;
-    background-image: url("newspaperbackground.jpg");
-    font-size: 32px;
-    font-weight: bold;
-    font-family: mine1, Arial, Helvetica, sans-serif;
-    font-size: 32px;
-    color: black;
-    flex-basis: 100%;
-    text-align: center;
 }
 
 #current-name {
@@ -152,7 +129,7 @@ input {
     text-align: center;
 }
 
-#current-date, #current-symbol, #current-open, #current-close, #current-high, #current-low, #current-volume {
+#current-date, #current-symbol, #current-open, #current-close, #current-high, #current-low {
     font-size: 24px;
     width: 200px;
     height: 50px;
@@ -170,8 +147,7 @@ input {
     margin-right: 20px;
     margin-left: 20px;
     background-image: linear-gradient(rgb(220, 220, 220), white);
-    background-image: url("newspaperbackground.jpg");
-    background-size: cover;
+    background-image: url("images/newspaperbackground.jpg");
     border: 2px solid black;
     border-radius: 15px;
     box-shadow: 2px 2px 2px black;
@@ -187,26 +163,22 @@ input {
     flex-basis: 100%;
 }
 
-#sectorStocks {
-    display: flex;
-    flex-flow: row wrap;
-    justify-content: center;
-}
-
-#related-button {
-    background-color: white;
+#sector stocks {
+    background-color: rgb(255, 255, 255);
     border: 2px solid black;
     border-radius: 5px;
     box-shadow: 2px 2px 2px black;
-    width: 200px;
-    height: 50px;
-    margin: 20px;
+    width: fit-content;
+    min-width: 100px;
+    height: fit-content;
+    margin: 10px;
     padding: 5px;
-    font-size: 12px;
+    font-size: 20px;
 }
 
-#related-button:hover {
+#related1:hover, #related2:hover, #related3:hover {
     scale: 105%;
+    font-size: 22px;
     color: white;
     background-color: blue;
 }
