@@ -116,8 +116,6 @@ function showStockData(data) {
             savedSearches.push(data.symbol);
             localStorage.setItem("savedSearches", JSON.stringify(savedSearches));
         };
-
-        var sectorStocks = $("#sectorStocks");
     
         for (let i = 0; i < dataSet.length; i++) {
             if (dataSet[i].Sector == sectorName) {
@@ -148,7 +146,10 @@ function clearPage() {
     if (relatedTitleEl.children().length > 0) {
         relatedTitleEl.children().empty();
     };
-    $("#sectorStocks").empty();
+
+    var elem = $("<div>").text("Search for a stock to see the data").attr("id", "current-name");
+    currentSection.append(elem);
+    sectorStocks.empty();
 };
 
     // Init to run on page load
@@ -169,6 +170,15 @@ searchButtonEl.on("click", async function(event) {
     var symbol = searchInputEl.val().split(" - ")[0];
     var data = await getStockDataBySymbol(symbol);
     showStockData(data);
+});
+
+
+clearSearchesButtonEl.on("click", async function(event) {
+    event.preventDefault();
+    localStorage.removeItem("savedSearches");
+    savedSearches = [];
+    clearPage();
+    $("#recent-stock-list").empty();
 });
 
     // Autocomplete dropdown menu
