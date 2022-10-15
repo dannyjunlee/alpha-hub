@@ -8,7 +8,7 @@ var relatedStockListEl = $("#related-button");
 // DATA
 var sp500Data;
 var autoCompleteOptions;
-var apiKey = "GJTPhgMrUTkcSwwk7ppFnCg8e6lnpWOj";
+var apiKey = "t33n_NZY1eavOu1OUlaDcqDNrKdKQLS2";
 var savedSearches = JSON.parse(localStorage.getItem("savedSearches")) || [];
 
     // Date
