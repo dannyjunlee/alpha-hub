@@ -118,8 +118,6 @@ function showStockData(data) {
             savedSearches.push(data.symbol);
             localStorage.setItem("savedSearches", JSON.stringify(savedSearches));
         };
-
-        var sectorName = $("#related-title").children().eq(0).text();
     
         for (let i = 0; i < dataSet.length; i++) {
             if (dataSet[i].Sector == sectorName) {
@@ -149,11 +147,9 @@ function clearPage() {
     if (relatedTitleEl.children().length > 0) {
         relatedTitleEl.children().empty();
     };
-    var elem = $("<div>").attr("id", "current-name");
-    elem.text("Search for a stock to see the data");
+    var elem = $("<div>").text("Search for a stock to see the data").attr("id", "current-name");
     currentSection.append(elem);
     sectorStocks.empty();
-    $("#recent-stock-list").empty();
 };
 
 
@@ -182,6 +178,7 @@ clearSearchesButtonEl.on("click", async function(event) {
     localStorage.removeItem("savedSearches");
     savedSearches = [];
     clearPage();
+    $("#recent-stock-list").empty();
 })
 
     // Autocomplete dropdown menu
