@@ -149,6 +149,22 @@ input {
     scale: 102%;
 }
 
+.clear-recent-searches {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding: 0.5em 1em;
+    width: 100%;
+    background-color: blue;
+    border: 1px solid white;
+    box-shadow: 2px 2px 2px black;
+    color: white;
+    border-radius: 2px;
+}
+
+.clear-recent-searches:hover {
+    scale: 105%;
+}
+
 #current {
     background-color: rgba(47, 50, 50, 0.65);
     border-radius: 8px;
