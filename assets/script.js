@@ -180,7 +180,7 @@ searchButtonEl.on("click", async function(event) {
         console.log(data.status);
         var invalidMsg = $("<div>").text("Invalid Stock - Please Choose From the Autocomplete List").attr("id", "invalid-stock");
         $("#current").append($(invalidMsg));
-    }
+    };
 });
 
     // Autocomplete dropdown menu
