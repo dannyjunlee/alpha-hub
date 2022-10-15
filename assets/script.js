@@ -4,9 +4,7 @@ var searchButtonEl = $(".pure-button");
 var recentSearchListEl = $("#recent-stock-list");
 var relatedTitleEl = $("#related-title");
 var relatedStockListEl = $("#related-button");
-var clearSearchesButtonEl = $(".clear-recent-searches");
-var sectorStocks = $("#sectorStocks");
-var currentSection = $("#current");
+var clearSearchesButtonEl = $("#clear-recent-searches");
 
 // DATA
 var sp500Data;
@@ -84,8 +82,8 @@ function showStockData(data) {
         var sectorName;
         for (let i = 0; i < dataSet.length; i++) {
             if (data.symbol == dataSet[i].Symbol) {
-                currentSection.append($("<div>").text(dataSet[i].Name).attr("id", "current-name"));
-                $("#related-title").append($("<div>").text(dataSet[i].Sector));
+                $("#current").append($("<div>").text(dataSet[i].Name).attr("id", "current-name"));
+                $("#related-title").append($("<div>").text(dataSet[i].Sector).attr("id", "sector"));
                 sectorName = dataSet[i].Sector;
             };
         };
@@ -96,13 +94,13 @@ function showStockData(data) {
         var low = $("<div>").text("Low: $" + data.low).attr("id", "current-low");
         var close = $("<div>").text("Close: $" + data.close).attr("id", "current-close");
         var volume = $("<div>").text(data.volume.toLocaleString()).attr("id", "current-volume");
-        currentSection.append(ticker);
-        currentSection.append(date);
-        currentSection.append(open);
-        currentSection.append(high);
-        currentSection.append(low);
-        currentSection.append(close);
-        currentSection.append(volume);
+        $("#current").append(date);
+        $("#current").append(ticker);
+        $("#current").append(open);
+        $("#current").append(high);
+        $("#current").append(low);
+        $("#current").append(close);
+        $("#current").append(volume);
 
         var index = 0;
 
@@ -119,7 +117,7 @@ function showStockData(data) {
             localStorage.setItem("savedSearches", JSON.stringify(savedSearches));
         };
 
-        var sectorName = $("#related-title").children().eq(0).text();
+        var sectorStocks = $("#sectorStocks");
     
         for (let i = 0; i < dataSet.length; i++) {
             if (dataSet[i].Sector == sectorName) {
@@ -128,9 +126,9 @@ function showStockData(data) {
             };
         };
 
-    } else{
-            currentSection.append("<h2>Invalid Stock - Please Choose From the Autocomplete List</h2>").attr("id", "invalid-stock");
-        }
+    } else {
+            $("#current").append("<div>Invalid Stock - Please Choose From the Autocomplete List</div>").attr("id", "invalid-stock");
+        };
 };
 
     // Render saved searches from localStorage to recent searches section
@@ -145,14 +143,12 @@ function renderSearches() {
     // Function to clear page and reset to default values upon update of page information
 function clearPage() {
     searchInputEl.text("Search");
-    currentSection.text("");
+    $("#current").text("");
     $("#invalid-stock").text("");
     if (relatedTitleEl.children().length > 0) {
         relatedTitleEl.children().empty();
     };
-    var elem = $("<div>").text("Search for a stock to see the data").attr("id", "current-name");
-    currentSection.append(elem);
-    sectorStocks.empty();
+    $("#sectorStocks").empty();
 };
 
     // Init to run on page load
@@ -175,17 +171,9 @@ searchButtonEl.on("click", async function(event) {
     showStockData(data);
 });
 
-clearSearchesButtonEl.on("click", async function(event) {
-    event.preventDefault();
-    localStorage.removeItem("savedSearches");
-    savedSearches = [];
-    clearPage();
-    $("#recent-stock-list").empty();
-})
-
     // Autocomplete dropdown menu
 $( function() {
-    searchInputEl.autocomplete({
+    $( "#stock-name" ).autocomplete({
       source: autoCompleteOptions
     });
 });
@@ -200,7 +188,7 @@ recentSearchListEl.on("click", "button", async function(event) {
 });
 
     // User clicks on related stocks to show info on page
-sectorStocks.on("click", "button", async function(event) {
+$("#sectorStocks").on("click", "button", async function(event) {
     event.preventDefault();
     clearPage();
     var symbolIndex = $(event.target).text().split(" - ");
@@ -208,6 +196,14 @@ sectorStocks.on("click", "button", async function(event) {
     var data = await getStockDataBySymbol(symbol);
     showStockData(data);
 });
+
+clearSearchesButtonEl.on("click", async function(event) {
+    event.preventDefault();
+    localStorage.removeItem("savedSearches");
+    savedSearches = [];
+    $("#recent-stock-list").empty();
+})
+
 
 // INITIALIZATION
 init();
