@@ -9,19 +9,23 @@ https://dannyjunlee.github.io/alpha-hub/
 This application is designed for users interested in starting to invest in stocks and looking to build a diversified portfolio (diversified referring to a portfolio of stocks consisting of diverse backgrounds/origin/classification/etc.). This tool helps users by presenting them with data for the stock they searched along with stocks from the S&P500 that align with the same sector, allowing the user to look through related stocks. The application is not designed for a user looking to conduct more advanced/in-depth analysis of stocks, as we simply provide cursory information in a format that is accessible to the beginner investor and in a way that is not easily found elsewhere (at least for free).
 
 ## Usage
+<br>
+<img src="assets/images/working-site.gif" style="width:300px; height auto;">
 
 The user is greeted with a simple interface with an input box to enter the stock the user would like to see data for. The input box has an autocomplete function so that the user knows which stocks are valid choices.
-<br><img src="assets/images/autocompleteshot.jpg" style="width:300px; height auto;">
+<br>
 
 When the user selects a valid stock and submits using the search button that stock's data is presented, including the symbol, data date, open, close, high, low, and volume for that date (previous day's final information).
-<br><img src="assets/images/searchedshot.jpg" style="width:300px; height auto;">
+<br>
 
 The searched stock is also added to the recent searches list for easy access in the future.
-<br><img src="assets/images/recentlistshot.jpg" style="width:300px; height auto;">
+<br>
 
 Upon searching a stock a list of all related S&P500 stocks of the same sector appear which the user can also click on in order to view that stock's data.
-<br><img src="assets/images/relatedshot.jpg" style="width:300px; height auto;">
+<br>
 
+<img src="assets/images/local-storage-visual.gif" style="width:300px; height auto;">
+<br>
 
 ## Credits
 
