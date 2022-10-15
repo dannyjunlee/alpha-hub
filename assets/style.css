@@ -122,7 +122,7 @@ input {
     margin: 5px;
     padding: 2px;
     text-align: center;
-    width: 60px;
+    width: 70px;
 }
 
 #recent-stock-list button:hover {
@@ -149,20 +149,19 @@ input {
     scale: 102%;
 }
 
-.clear-recent-searches {
-    margin-top: 20px;
-    margin-bottom: 20px;
-    padding: 0.5em 1em;
-    width: 100%;
-    background-color: blue;
-    border: 1px solid white;
-    box-shadow: 2px 2px 2px black;
+#clear-recent-searches {
+    background-color: rgba(0, 0, 0, 0);
+    border: none;
     color: white;
-    border-radius: 2px;
+    font-size: 17px;
+    font-weight: 300;
+    text-align: left;
+    padding: 15px;
+
 }
 
-.clear-recent-searches:hover {
-    scale: 105%;
+#clear-recent-searches:hover {
+    color: #87BBA2
 }
 
 #current {
@@ -310,10 +309,17 @@ input {
 
 #invalid-stock {
     background-color: rgba(47, 50, 50, 0.65);
+    border-radius: 8px;
+    display: flex;
+    flex-flow: row wrap;
     color: white;
     text-align: center;
     font-size: 30px;
     font-weight: 300;
-    margin: auto;
+    height: min-content;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    margin-left: 70px;
+    margin-right: 20px;
     padding: 50px;
 }
