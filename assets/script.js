@@ -56,17 +56,6 @@ function getAutoCompleteOptions() {
     return options;
 };
 
-    // Taking sector searched and returning other data with same sector
-function getSymbolsMatchingSector(searchSector, sp500Data) {
-    var matches = [];
-    for (var i = 0; i < sp500Data.length; i++) {
-        if (sp500Data[i].Sector === searchSector) {
-            matches.push(sp500Data[i].Symbol);
-        }
-    }
-    return matches;
-};
-
     // Function that takes in a stock symbol, makes a fetch call to polygon API, and returns data on that stock
 async function getStockDataBySymbol(symbol) {
     var polygonURL = "https://api.polygon.io/v1/open-close/" + symbol.toUpperCase() + "/" + lastWeekDay + "?adjusted=true&apiKey=" + apiKey;
@@ -78,61 +67,55 @@ async function getStockDataBySymbol(symbol) {
 
     // Displays stock data on page
 function showStockData(data) {
-    // if (data.status === "OK") {
-        var dataSet = JSON.parse(localStorage.getItem("sp500Data"));
-        var sectorName;
-        for (let i = 0; i < dataSet.length; i++) {
-            if (data.symbol == dataSet[i].Symbol) {
-                $("#current").append($("<div>").text(dataSet[i].Name).attr("id", "current-name"));
-                sectorName = dataSet[i].Sector;
-                $("#related-title").append($("<div>").text(sectorName).attr("id", "sector"));
-            };
+    var dataSet = JSON.parse(localStorage.getItem("sp500Data"));
+    var sectorName;
+    for (let i = 0; i < dataSet.length; i++) {
+        if (data.symbol == dataSet[i].Symbol) {
+            $("#current").append($("<div>").text(dataSet[i].Name).attr("id", "current-name"));
+            sectorName = dataSet[i].Sector;
+            $("#related-title").append($("<div>").text(sectorName).attr("id", "sector"));
         };
-        var date = $("<div>").text(data.from).attr("id", "current-date");
-        var ticker = $("<div>").text("Symbol: " + data.symbol).attr("id", "current-symbol");
-        var open = $("<div>").text("Open: $" + data.open).attr("id", "current-open");
-        var high = $("<div>").text("High: $" + data.high).attr("id", "current-high");
-        var low = $("<div>").text("Low: $" + data.low).attr("id", "current-low");
-        var close = $("<div>").text("Close: $" + data.close).attr("id", "current-close");
-        var volume = $("<div>").text(data.volume.toLocaleString()).attr("id", "current-volume");
+    };
+    var date = $("<div>").text(data.from).attr("id", "current-date");
+    var ticker = $("<div>").text("Symbol: " + data.symbol).attr("id", "current-symbol");
+    var open = $("<div>").text("Open: $" + data.open).attr("id", "current-open");
+    var high = $("<div>").text("High: $" + data.high).attr("id", "current-high");
+    var low = $("<div>").text("Low: $" + data.low).attr("id", "current-low");
+    var close = $("<div>").text("Close: $" + data.close).attr("id", "current-close");
+    var volume = $("<div>").text(data.volume.toLocaleString()).attr("id", "current-volume");
 
-        console.log(data.from);
-        console.log(sectorName);
+    console.log(data.from);
+    console.log(sectorName);
 
-        $("#current").append(date);
-        $("#current").append(ticker);
-        $("#current").append(open);
-        $("#current").append(high);
-        $("#current").append(low);
-        $("#current").append(close);
-        $("#current").append(volume);
+    $("#current").append(date);
+    $("#current").append(ticker);
+    $("#current").append(open);
+    $("#current").append(high);
+    $("#current").append(low);
+    $("#current").append(close);
+    $("#current").append(volume);
 
-        var index = 0;
+    var index = 0;
 
-        for (let i = 0; i < recentSearchListEl.children().length; i++) {
-            if (recentSearchListEl.children().eq(i).text() == data.symbol) {
-                index++;
-            };
+    for (let i = 0; i < recentSearchListEl.children().length; i++) {
+        if (recentSearchListEl.children().eq(i).text() == data.symbol) {
+            index++;
         };
+    };
 
-        if (index === 0) {
-            var tickerBtn = $("<button>").text(data.symbol);
-            recentSearchListEl.append(tickerBtn);
-            savedSearches.push(data.symbol);
-            localStorage.setItem("savedSearches", JSON.stringify(savedSearches));
-        };
-    
-        for (let i = 0; i < dataSet.length; i++) {
-            if (dataSet[i].Sector == sectorName) {
-                var sectorStockBtn = $("<button>").text(dataSet[i].Name + " - " + dataSet[i].Symbol).attr("id", "related-button");
-                sectorStocks.append(sectorStockBtn);
-            };
-        };
+    if (index === 0) {
+        var tickerBtn = $("<button>").text(data.symbol);
+        recentSearchListEl.append(tickerBtn);
+        savedSearches.push(data.symbol);
+        localStorage.setItem("savedSearches", JSON.stringify(savedSearches));
+    };
 
-    // } else {
-    //     clearPage();
-    //     $("#current").append("<div>Invalid Stock - Please Choose From the Autocomplete List</div>").attr("id", "invalid-stock");
-    //     };
+    for (let i = 0; i < dataSet.length; i++) {
+        if (dataSet[i].Sector == sectorName) {
+            var sectorStockBtn = $("<button>").text(dataSet[i].Name + " - " + dataSet[i].Symbol).attr("id", "related-button");
+            sectorStocks.append(sectorStockBtn);
+        };
+    };
 };
 
     // Render saved searches from localStorage to recent searches section
