@@ -147,7 +147,7 @@ function clearPage() {
     if (relatedTitleEl.children().length > 0) {
         relatedTitleEl.children().empty();
     };
-    $("#sectorStocks").empty();
+    sectorStocks.empty();
 };
 
     // Init to run on page load
