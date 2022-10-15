@@ -1,128 +1,172 @@
 * {
     box-sizing: border-box;
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: 'League Spartan', sans-serif;
     margin: 0;
     padding: 0;
 }
 
 @font-face {
-    font-family: mine1;
-    src: url("fonts/LicensePlate.ttf");
+    font-family: 'League Spartan', sans-serif;
 }
 
 body {
-    background-image: url("images/heroscreen.png");
+    background-image: url("images/stockImageMedium.jpeg");
     padding-top: 25px;
 }
 
 header {
-    background-image: url("images/newspaperbackground.jpg");
-    border-top: 1px solid black;
-    border-bottom: 1px solid black;
-    color: black;
+    background-color: rgba(0, 0, 0, 0.85);
+    /* background-color: rgba(22, 23, 23, 0.43); */
+    /* background-color: rgba(53, 119, 109, 0.584); */
+    color: white;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 180px;
+    width: 100%;
     margin: auto;
-    margin-bottom: 10px;
-    padding-bottom: 10px;
-    padding-top: 10px;
-    text-align: center;
+    text-align: left;
 }
 
 h1 {
-    font-family: mine1, Arial, Helvetica, sans-serif;
-    font-size: 60px;
-    font-weight: lighter;
+    font-family: 'League Spartan', sans-serif;
+    font-size: 100px;
+    font-weight: 100;
+    margin-left: 80px;
+    margin-top: 40px;
+}
+
+h1:hover {
+    color: #87BBA2;
+    transition: 500ms ease-in-out;
+}
+
+main {
+    margin-top: 200px;
+    padding: 50px;
 }
 
 aside {
+    background-color: rgba(22, 23, 23, 0.43);
+    border-radius: 8px;
     float: left;
-    width: 33%;
+    width: 35%;
     height: auto;
-    padding: 10px;
+    margin: auto;
+    margin-right: 50px;
+    padding: 40px;
 }
 
-h2, h3 {
+aside:hover {
+    background-color: rgba(23, 23, 23, 0.8);
+    transition: 700ms ease-in-out;
+}
+
+
+h2 {
     color: white;
-    font-family: mine1, Arial, Helvetica, sans-serif;
-    font-size: 32px;
-    font-weight: bold;
+    font-family: 'League Spartan', sans-serif;
+    font-size: 45px;
+    font-weight: 300;
+    margin-top: 10px;
+}
+
+h3 {
+    color: #C9E4CA;
+    font-family: 'League Spartan', sans-serif;
+    font-size: 24px;
+    font-weight: 500;
+    letter-spacing: 2px;
     margin-top: 10px;
 }
 
 #search-form {
-    border-bottom: 2px solid white;
+    border-bottom: 1px solid white;
+    margin-bottom: 50px;
 }
 
 input {
-    box-shadow: 2px 2px 2px black;
-    font-size: 20px;
+    display: flex;
+    box-shadow: 1px 1px 8px black;
+    border-radius: 5px;
+    font-size: 18px;
+    font-weight: 300;
     height: 40px;
-    width: 100%;
+    width: 95%;
+    margin-top: 20px;
+    padding: 20px;
 }
 
 #recent-searches {
     display: flex;
     flex-direction: column;
+    padding: 15px;
 }
 
 .list-group {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    flex-wrap: wrap;
 }
 
 #recent-stock-list button {
-    background-image: linear-gradient(rgb(220, 220, 220), white);
-    border: 1px solid black;
-    border-radius: 5px;
+    background-color: #677a7c;
+    border: none;
+    border-radius: 30px;
     cursor: pointer;
-    font-size: 20px;
+    color: white;
+    font-size: 17px;
+    font-weight: 300;
     height: 32px;
     justify-self: center;
     margin: 5px;
     padding: 2px;
     text-align: center;
-    width: 50%;
+    width: 70px;
 }
 
 #recent-stock-list button:hover {
-    box-shadow: 2px 2px 2px white;
-    font-weight: bold;
-    scale: 102%
+    background-color: white;
+    color:#3B6064;
+    font-weight: 400;
 }
 
 .pure-button {
-    background-color: blue;
-    border: 1px solid white;
-    box-shadow: 2px 2px 2px black;
+    display: flex;
+    justify-content: center;
+    background-color: rgb(25, 165, 158);
+    border-radius: 15px;
+    font-size: 18px;
+    font-weight: 300;
     margin-top: 20px;
-    margin-bottom: 20px;
-    width: 100%;
+    margin-bottom: 80px;
+    width: 120px;
 }
 
 .pure-button:hover {
-    scale: 105%;
+    background-color: rgb(108, 215, 215);
+    transition: 700ms ease-in-out;
+    scale: 102%;
 }
 
-.clear-recent-searches {
-    margin-top: 20px;
-    margin-bottom: 20px;
-    padding: 0.5em 1em;
-    width: 100%;
-    background-color: blue;
-    border: 1px solid white;
-    box-shadow: 2px 2px 2px black;
+#clear-recent-searches {
+    background-color: rgba(0, 0, 0, 0);
+    border: none;
     color: white;
-    border-radius: 2px;
+    font-size: 17px;
+    font-weight: 300;
+    text-align: left;
+    padding: 15px;
+
 }
 
-.clear-recent-searches:hover {
-    scale: 105%;
+#clear-recent-searches:hover {
+    color: #87BBA2
 }
 
 #current {
-    background-image: url("images/newspaperbackground.jpg");
-    border: 2px solid black;
-    border-radius: 15px;
-    box-shadow: 2px 2px 2px black;
+    background-color: rgba(47, 50, 50, 0.65);
+    border-radius: 8px;
     display: flex;
     flex-flow: row wrap;
     font-size: 32px;
@@ -130,34 +174,61 @@ input {
     height: min-content;
     justify-content: space-between;
     margin-bottom: 10px;
-    margin-left: 20px;
+    margin-left: 70px;
     margin-right: 20px;
     min-height: 200px;
-    padding: 10px;
+    padding: 50px;
 }
 
-#current-name {
-    color: black;
-    font-family: mine1, Arial, Helvetica, sans-serif;
-    font-size: larger;
+#current:hover {
+    background-color: rgba(23, 23, 23, 0.8);
+    transition: 700ms ease-in-out;
+}
+
+#current-title {
+    color:#C9E4CA;
+    font-family: 'League Spartan', sans-serif;
+    font-size: 75px;
+    font-weight: 300;
+    letter-spacing: 8px;
     flex-basis: 100%;
     margin: 10px;
     text-align: center;
 }
 
+#current-name {
+    color: white;
+    font-family: 'League Spartan', sans-serif;
+    font-size: 65px;
+    font-weight: 300;
+    flex-basis: 100%;
+    margin: 10px;
+    text-align: center;
+}
+
+
 #current-date, #current-symbol, #current-open, #current-close, #current-high, #current-low, #current-volume {
-    font-size: 24px;
+    color:rgb(220, 220, 220);
+    font-size: 28px;
+    font-weight: 100;
     height: 50px;
     margin: 5px;
     width: 200px;
 }
 
+#current-date {
+    font-weight: 400;
+}
+
+#current-volume {
+    font-size: 32px;
+    font-weight: 500;
+}
+
 #related {
-    align-items: center;
-    background-image: url("images/newspaperbackground.jpg");
-    border: 2px solid black;
-    border-radius: 15px;
-    box-shadow: 2px 2px 2px black;
+    align-items:flex-start;
+    background-color: rgba(47, 50, 50, 0.65);
+    border-radius: 8px;
     display: flex;
     flex-flow: row wrap;
     font-size: 32px;
@@ -167,15 +238,28 @@ input {
     margin-left: 20px;
     margin-right: 20px;
     min-height: 200px;
-    padding: 10px;
+    padding: 50px;
 }
 
+#related:hover {
+    background-color: rgba(23, 23, 23, 0.8);
+    transition: 700ms ease-in-out;
+}
+
+
 #related-title {
-    color: black;
+    color:#C9E4CA;
     flex-basis: 100%;
-    font-family: mine1, Arial, Helvetica, sans-serif;
-    font-size: 24;
-    font-weight: bold;
+    font-family: 'League Spartan', sans-serif;
+    font-size: 32px;
+    font-weight: 400;
+    margin-bottom: 35px;
+}
+
+#sector {
+    color: white;
+    font-size: 50px;
+    font-weight: 300;
 }
 
 #sectorStocks {
@@ -185,21 +269,23 @@ input {
 }
 
 #related-button {
-    background-color: white;
-    border: 2px solid black;
-    border-radius: 5px;
-    box-shadow: 2px 2px 2px black;
-    font-size: 12px;
-    height: 50px;
+    background-color: #87bba2d5;
+    border: none;
+    border-radius: 10px;
+    color: white;
+    font-family: 'League Spartan', sans-serif;
+    font-size: 21px;
+    font-weight: 300;
+    height: 70px;
+    width: 215px;
     margin: 20px;
     padding: 5px;
-    width: 200px;
 }
 
 #related-button:hover {
-    background-color: blue;
+    background-color: #87BBA2;
     color: white;
-    scale: 105%;
+    scale: 102%;
 }
 
 @media screen and (max-width: 700px) {
@@ -219,4 +305,21 @@ input {
     #related1, #related2, #related3 {
         font-size: 16px;
     }
+}
+
+#invalid-stock {
+    background-color: rgba(47, 50, 50, 0.65);
+    border-radius: 8px;
+    display: flex;
+    flex-flow: row wrap;
+    color: white;
+    text-align: center;
+    font-size: 30px;
+    font-weight: 300;
+    height: min-content;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    margin-left: 70px;
+    margin-right: 20px;
+    padding: 50px;
 }

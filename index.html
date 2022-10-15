@@ -5,6 +5,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AlphaHub</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@100;300;400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/purecss@2.1.0/build/pure-min.css" integrity="sha384-yHIFVG6ClnONEA5yB5DJXfW2/KC173DIQrYoZMEtBvGzmf0PKiGyNEqe9N6BNDBH" crossorigin="anonymous">
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
     <link rel="stylesheet" href="./assets/style.css">
@@ -14,43 +17,45 @@
     <header>
         <h1>AlphaHub</h1>
     </header>
-
-    <aside>
-        <div class="container">
-            <div class="row">
-              <div class="col">
-                <h2>Search for a Stock</h2>
-                <br />
-                <form id="search-form">
-                  <div class="search-group row">
-                    <div class="col">
-                      <input type="text" onfocus="this.value=''" class="search-control" id="stock-name" />
+    <main>
+      <aside>
+          <div class="container">
+              <div class="row">
+                <div class="col">
+                  <h2>Stock Search</h2>
+                  <br />
+                  <form id="search-form">
+                    <div class="search-group row">
+                      <div class="col">
+                        <input type="text" onfocus="this.value=''" class="search-control" id="stock-name" placeholder="Enter stock symbol or name here"/>
+                      </div>
                     </div>
-                  </div>
-                  <button class="pure-button pure-button-primary">Search</button>
-                </form>
-              </div>
-            </div>
-            <div>
-                <div id="recent-searches">
-                  <h3>Recent Searches</h3>
-                    <br />
-                    <button class="clear-recent-searches">Clear Recent Searches</button>
-                    <ul class="list-group" id="recent-stock-list">
-                    </ul>
+                    <button class="pure-button pure-button-primary">Search</button>
+                  </form>
                 </div>
+              </div>
+              <div>
+                  <div id="recent-searches">
+                    <h3>RECENT SEARCHES</h3>
+                      <button id="clear-recent-searches">Clear Recent Searches</button>
+                      <ul class="list-group" id="recent-stock-list">
+                      </ul>
+                  </div>
+              </div>
             </div>
         </div>
     </aside>
 
-    <section id="current">
-        <div id="current-name">Search for a stock to see the data</div>
-    </section>
+      <section id="current">
+        <div id="current-title">STOCK DATA HUB</div>  
+        <div id="current-name"></div>
+      </section>
 
-    <section id="related">
-        <h3 id="related-title">Related Stocks</h3>
-        <div id="sectorStocks"></div>
-    </section>
+      <section id="related">
+          <h3 id="related-title">SECTOR</h3>
+          <div id="sectorStocks"></div>
+      </section>
+  </main>
 </body>
 
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
