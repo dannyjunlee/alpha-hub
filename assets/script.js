@@ -56,17 +56,6 @@ function getAutoCompleteOptions() {
     return options;
 };
 
-    // Taking sector searched and returning other data with same sector
-function getSymbolsMatchingSector(searchSector, sp500Data) {
-    var matches = [];
-    for (var i = 0; i < sp500Data.length; i++) {
-        if (sp500Data[i].Sector === searchSector) {
-            matches.push(sp500Data[i].Symbol);
-        }
-    }
-    return matches;
-};
-
     // Function that takes in a stock symbol, makes a fetch call to polygon API, and returns data on that stock
 async function getStockDataBySymbol(symbol) {
     var polygonURL = "https://api.polygon.io/v1/open-close/" + symbol.toUpperCase() + "/" + lastWeekDay + "?adjusted=true&apiKey=" + apiKey;
