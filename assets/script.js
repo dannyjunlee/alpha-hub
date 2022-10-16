@@ -84,9 +84,6 @@ function showStockData(data) {
     var close = $("<div>").text("Close: $" + data.close).attr("id", "current-close");
     var volume = $("<div>").text(data.volume.toLocaleString()).attr("id", "current-volume");
 
-    console.log(data.from);
-    console.log(sectorName);
-
     $("#current").append(date);
     $("#current").append(ticker);
     $("#current").append(open);
@@ -157,10 +154,8 @@ searchButtonEl.on("click", async function(event) {
     var data = await getStockDataBySymbol(symbol);
     // Changes
     if (data.status == "OK") {
-        console.log(data.status);
         showStockData(data);
     } else {
-        console.log(data.status);
         var invalidMsg = $("<div>").text("Invalid Stock - Please Choose From the Autocomplete List").attr("id", "invalid-stock");
         $("#current").append($(invalidMsg));
     };
