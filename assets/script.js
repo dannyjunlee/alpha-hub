@@ -24,12 +24,12 @@ var dateOptions = {
 
 today.setDate(today.getDate());
 
-if (today.getDay() === 6) {
-    lastWeekDay.setDate(today.getDate()-1);
-} else if (today.getDay() === 0) {
+if (today.getDay() === 0) {
     lastWeekDay.setDate(today.getDate()-2);
+} else if (today.getDay() === 1) {
+    lastWeekDay.setDate(today.getDate()-3);
 } else {
-    lastWeekDay.setDate(today.getDate());
+    lastWeekDay.setDate(today.getDate()-1);
 };
 
 lastWeekDay = 
