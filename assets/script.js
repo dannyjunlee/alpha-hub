@@ -15,21 +15,21 @@ var savedSearches = JSON.parse(localStorage.getItem("savedSearches")) || [];
 
     // Date
 var lastWeekDay = new Date();
-var yesterday = new Date();
+var today = new Date();
 var dateOptions = {
     year: "numeric",
     month: "2-digit",
     day: "2-digit"
 };
 
-yesterday.setDate(yesterday.getDate()-1);
+today.setDate(today.getDate());
 
-if (yesterday.getDate() == 6) {
-    lastWeekDay.setDate(lastWeekDay.getDate()-2);
-} else if (yesterday.getDate() == 0) {
-    lastWeekDay.setDate(lastWeekDay.getDate()-3);
+if (today.getDay() === 6) {
+    lastWeekDay.setDate(today.getDate()-1);
+} else if (today.getDay() === 0) {
+    lastWeekDay.setDate(today.getDate()-2);
 } else {
-    lastWeekDay.setDate(lastWeekDay.getDate()-1);
+    lastWeekDay.setDate(today.getDate());
 };
 
 lastWeekDay = 
@@ -83,9 +83,6 @@ function showStockData(data) {
     var low = $("<div>").text("Low: $" + data.low).attr("id", "current-low");
     var close = $("<div>").text("Close: $" + data.close).attr("id", "current-close");
     var volume = $("<div>").text(data.volume.toLocaleString()).attr("id", "current-volume");
-
-    console.log(data.from);
-    console.log(sectorName);
 
     $("#current").append(date);
     $("#current").append(ticker);
@@ -157,10 +154,8 @@ searchButtonEl.on("click", async function(event) {
     var data = await getStockDataBySymbol(symbol);
     // Changes
     if (data.status == "OK") {
-        console.log(data.status);
         showStockData(data);
     } else {
-        console.log(data.status);
         var invalidMsg = $("<div>").text("Invalid Stock - Please Choose From the Autocomplete List").attr("id", "invalid-stock");
         $("#current").append($(invalidMsg));
     };
