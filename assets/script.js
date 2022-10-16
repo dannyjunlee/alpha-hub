@@ -15,21 +15,21 @@ var savedSearches = JSON.parse(localStorage.getItem("savedSearches")) || [];
 
     // Date
 var lastWeekDay = new Date();
-var yesterday = new Date();
+var today = new Date();
 var dateOptions = {
     year: "numeric",
     month: "2-digit",
     day: "2-digit"
 };
 
-yesterday.setDate(yesterday.getDate()-1);
+today.setDate(today.getDate());
 
-if (yesterday.getDate() == 6) {
-    lastWeekDay.setDate(lastWeekDay.getDate()-2);
-} else if (yesterday.getDate() == 0) {
-    lastWeekDay.setDate(lastWeekDay.getDate()-3);
+if (today.getDay() === 6) {
+    lastWeekDay.setDate(today.getDate()-1);
+} else if (today.getDay() === 0) {
+    lastWeekDay.setDate(today.getDate()-2);
 } else {
-    lastWeekDay.setDate(lastWeekDay.getDate()-1);
+    lastWeekDay.setDate(today.getDate());
 };
 
 lastWeekDay = 
